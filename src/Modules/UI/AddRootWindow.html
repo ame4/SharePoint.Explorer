@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:sys="http://jscriptsuite.com/templates/clr/System,mscorlib"
+  xmlns:nodes="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Nodes"
+  xmlns:informations="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Informations"
+  xmlns:lists="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Lists.UI"
+  xmlns:ui="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.UI"
+  xmlns:emn="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Nodes"
+  xmlns:configurations="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Configurations"
+  xmlns:webs="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Webs.UI"
+  xmlns:j="http://jscriptsuite.com/templates"
+  xmlns:jc="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.Common,JScriptSuite.JScriptLib"
+  xmlns:dataBinding="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.DataBinding,JScriptSuite.JScriptLib"
+  xmlns:trees="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Trees,JScriptSuite.JScriptLib"
+  xmlns:buttons="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Buttons,JScriptSuite.JScriptLib"
+  xmlns:groupBoxes="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.GroupBoxes,JScriptSuite.JScriptLib"
+  xmlns:controls="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls,JScriptSuite.JScriptLib"
+  xmlns:windows="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Windows,JScriptSuite.JScriptLib"    
+  xmlns:tabs="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Tabs,JScriptSuite.JScriptLib">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body j:type="ui:AddRootWindow">
+  <table cellappading="0" cellspacing="0" class="properties" style="width:100%">
+    <tbody>
+      <tr>
+        <th>Url</th>
+        <td><input type="text" style="width:240px" j:control="controls:TextBox() { Value = j:control.Data.Url }"/></td>
+      </tr>
+      <tr>
+        <th j:control="buttons:ToggleLabel() { Checked = j:control.Data.IsSite }">Site</th>
+        <td><input type="checkbox" j:control="buttons:CheckBox() { Checked = j:control.Data.IsSite }" /></td>
+      </tr>
+      <tr>
+        <td colspan="2" style="text-align:right"  j:control="controls:Control() { ClassName = windows:MessageBoxSkin.Instance.CommandBarClass }">
+            <span tabindex="1" j:control="buttons:ImageTextButton() 
+                { 
+                    Execute = j:control.OK,
+                    ImageClass = windows:MessageBoxSkin.Instance.ButtonSkin(windows:DialogResult.OK).ImageClass,
+                    Text = windows:MessageBoxSkin.Instance.ButtonSkin(windows:DialogResult.OK).Text
+                }">
+            </span>
+            <span tabindex="1" j:control="buttons:ImageTextButton() 
+                {
+                    Execute = j:control.Cancel,                          
+                    ImageClass = windows:MessageBoxSkin.Instance.ButtonSkin(windows:DialogResult.Cancel).ImageClass,
+                    Text = windows:MessageBoxSkin.Instance.ButtonSkin(windows:DialogResult.Cancel).Text
+                }">
+            </span>                
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:sys="http://jscriptsuite.com/templates/clr/System,mscorlib"
+  xmlns:sp="http://jscriptsuite.com/templates/clr/James.SharePoint,James.SharePoint"
+  xmlns:lazy="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Lazy,JScriptSuite.JScriptLib"
+  xmlns:elc="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Lists.Components"
+  xmlns:ui="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Lists.UI"
+  xmlns:viewModels="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Lists.ViewModels"
+  xmlns:ecu="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Components.UI"
+  xmlns:emc="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Common"
+  xmlns:dplazy="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.DataBinding.Providers.Lazy,JScriptSuite.JScriptLib"
+  xmlns:dp="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.DataBinding.Providers,JScriptSuite.JScriptLib"
+  xmlns:interops="http://jscriptsuite.com/templates/clr/JScriptSuite.InteropServices,JScriptSuite"
+  xmlns:j="http://jscriptsuite.com/templates"
+  xmlns:jc="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.Common,JScriptSuite.JScriptLib"
+  xmlns:panes="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Panes,JScriptSuite.JScriptLib"
+  xmlns:dropdowns="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.DropDowns,JScriptSuite.JScriptLib"
+  xmlns:gridlayout="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.GridLayout,JScriptSuite.JScriptLib"
+  xmlns:splitters="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Splitters,JScriptSuite.JScriptLib"
+  xmlns:trees="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Trees,JScriptSuite.JScriptLib"
+  xmlns:buttons="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Buttons,JScriptSuite.JScriptLib"
+  xmlns:windows="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Windows,JScriptSuite.JScriptLib"
+  xmlns:gridLayout="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.GridLayout,JScriptSuite.JScriptLib"      
+  xmlns:tabs="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Tabs,JScriptSuite.JScriptLib"      
+  xmlns:controls="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls,JScriptSuite.JScriptLib">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title></title>
+</head>
+<body j:type="ui:ItemsPane">
+    <j:variable name="contentTypes" type="dp:ObservableList&lt;sp:ListContentType&gt;" />
+    <j:variable name="items" type="dplazy:ILazyObservable&lt;sp:FolderListItemCollection&gt;" />
+  
+    <div style="height: 100%; width: 100%; overflow: hidden; position: relative" 
+        j:control="gridLayout:GridLayoutPane() {
+          Rows = [ { Value = 40, Absolute = true }, { Value = 1 } ]
+        }">
+        <table cellpadding="4" cellspacing="0">
+            <tbody>
+                <tr>
+                    <th style="padding:4px">Content type</th>
+                    <td style="padding:4px">
+                      <span style="width: 200px; display:inline-block"
+                            j:control="dropdowns:DropDownList&lt;sp:ContentType&gt;()
+                                {
+                                    ListBox.DataSource := j:variable.contentTypes,
+                                    Value = j:control.Data.FolderItems.ContentType
+                                }">
+                      </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+      
+        <div j:control="lazy:LazyPane()
+              {
+                Element.Style.Visibility := jc:Operations.IsVisible(jc:Operations.IsNotNull(j:control.Data.FolderItems.ContentType)),
+                Lazy := j:variable.items,
+                gridLayout:GridLayoutPane.RowBindings = [ gridLayout:UnitBinding(1, 1) { Style = j:target.target.Element.Style } ]
+              }"
+            style="position: absolute; width: 100%; overflow: hidden">
+
+          <div style="width: 100%; height: 100%; overflow: hidden" j:control="splitters:Splitter&lt;panes:SplitPane&gt;(false, 0.5)">
+                <div tabindex="1" style="overflow: hidden" j:control="j:control.Overview { 
+                     DataSource = j:control.Data.OverviewListView.Target,
+                     RowsSelection.Data =: j:control.Data.SelectedItem
+                }"></div>
+                <div style="overflow: hidden; position: relative" 
+                     j:control="gridLayout:GridLayoutPane() {
+                        Rows = [ { Value = 40, Absolute = true }, { Value = 1 } ],
+                        Element.Style.Visibility := jc:Operations.IsVisible(jc:Operations.IsNotNull(j:control.Data.SelectedItem))
+                    }">
+                  <table cellspacing="0" cellpadding="0" style="width: 100%" j:control="controls:Control() { ClassName = windows:MessageBoxSkin.Instance.CommandBarClass }">
+                        <tbody>
+                            <tr>
+                                <td style="padding:4px; border-bottom:solid 1px white">
+                                    <span tabindex="1" j:control="buttons:ImageTextButton() 
+                                      { 
+                                          Execute = j:control.Data.EditItem,
+                                          Image = '/_layouts/images/edit.gif',
+                                          Enabled = jc:Operations.Cast&lt;sys:UInt64&gt;(sp:BasePermissions.EditListItems).Equals(
+                                            jc:Operations.And(jc:Operations.Cast&lt;sp:BasePermissions, sys:UInt64&gt;(sp:BasePermissions.EditListItems), 
+                                            jc:Operations.Cast&lt;sp:BasePermissions, sys:UInt64&gt;(j:control.Data.SelectedItem.EffectiveBasePermissions))),
+                                          Text = 'Edit...'
+                                      }"></span>
+                                    <span tabindex="1" j:control="buttons:ImageTextButton() 
+                                      { 
+                                          Execute = j:control.Data.CopyItem,
+                                          Image = '/_layouts/images/copy.gif',
+                                          Text = 'Copy...',
+                                          Enabled = jc:Operations.Or(jc:Operations.IsNull(j:control.Data.FolderItems.ParentFolder.Item),
+                                            jc:Operations.Cast&lt;sys:UInt64&gt;(sp:BasePermissions.AddListItems).Equals(
+                                                jc:Operations.And(jc:Operations.Cast&lt;sp:BasePermissions, sys:UInt64&gt;(sp:BasePermissions.AddListItems), 
+                                                jc:Operations.Cast&lt;sp:BasePermissions, sys:UInt64&gt;(j:control.Data.FolderItems.ParentFolder.Item.EffectiveBasePermissions)
+                                              )
+                                            )
+                                          )
+                                      }"></span>
+                                    <span tabindex="1" j:control="buttons:ImageTextButton() 
+                                      { 
+                                          Execute = j:control.Data.DeleteItem,
+                                          Image = '/_layouts/images/delitem.gif',
+                                          Text = 'Delete...',
+                                          Enabled = jc:Operations.Cast&lt;sys:UInt64&gt;(sp:BasePermissions.DeleteListItems).Equals(
+                                            jc:Operations.And(jc:Operations.Cast&lt;sp:BasePermissions, sys:UInt64&gt;(sp:BasePermissions.DeleteListItems), 
+                                            jc:Operations.Cast&lt;sp:BasePermissions, sys:UInt64&gt;(j:control.Data.SelectedItem.EffectiveBasePermissions)))
+                                      }">
+                                    </span>
+                                    <span style="margin-left:10px" tabindex="1" j:control="buttons:ImageTextButton() 
+                                      { 
+                                          Execute = j:control.Data.AddItem,
+                                          Image = '/_layouts/images/newitem.gif',
+                                          Text = 'Add item...',
+                                          Enabled = jc:Operations.Or(jc:Operations.IsNull(j:control.Data.FolderItems.ParentFolder.Item),
+                                            jc:Operations.Cast&lt;sys:UInt64&gt;(sp:BasePermissions.AddListItems).Equals(
+                                                        jc:Operations.And(jc:Operations.Cast&lt;sp:BasePermissions, 
+                                                            sys:UInt64&gt;(sp:BasePermissions.AddListItems), 
+                                                        jc:Operations.Cast&lt;sp:BasePermissions, 
+                                                            sys:UInt64&gt;(j:control.Data.FolderItems.ParentFolder.Item.EffectiveBasePermissions)
+                                                        )
+                                            )
+                                        )
+                                      }"></span>
+                                    <span style="margin-left:10px" tabindex="1" j:control="buttons:ImageTextButton() 
+                                      { 
+                                          Execute = j:control.Data.AddFolder,
+                                          Image = '/_layouts/images/nfolder.gif',
+                                          Text = 'Add folder...',
+                                          Enabled = jc:Operations.Or(jc:Operations.IsNull(j:control.Data.FolderItems.ParentFolder.Item),
+                                            jc:Operations.Cast&lt;sys:UInt64&gt;(sp:BasePermissions.AddListItems).Equals(
+                                                        jc:Operations.And(jc:Operations.Cast&lt;sp:BasePermissions, 
+                                                            sys:UInt64&gt;(sp:BasePermissions.AddListItems), 
+                                                        jc:Operations.Cast&lt;sp:BasePermissions, 
+                                                            sys:UInt64&gt;(j:control.Data.FolderItems.ParentFolder.Item.EffectiveBasePermissions)
+                                                        )
+                                            )
+                                        )
+                                      }"></span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="width:100%" 
+                      j:control="tabs:TabStrip() {
+                        gridLayout:GridLayoutPane.RowBindings = [ gridLayout:UnitBinding(1, 1, false) { Style = j:target.target.Element.Style } ]
+                      }">
+                      <j:collection target="TabItems">
+                        <j:item source="tabs:TabItem() { 
+                            Header = tabs:ImageTextTabHeaderItem() { Text = 'Fields' },
+                            Page = j:control.DetailGrid { DataSource = j:control.Data.DetailListView.Target }
+                          }"/>
+                        <j:item source="tabs:TabItem() { 
+                            Header = tabs:ImageTextTabHeaderItem() { Text = 'Permissions' },
+                            Page = j:control.PermissionsGrid { DataSource = j:control.Data.PermissionsListView.Target }
+                          }"/>
+                      </j:collection>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+    <j:bind source="j:control.Data.FolderItems.ParentFolder.ParentList.ContentTypes.Value" target="j:variable.contentTypes" active="j:control.Data.IsActive" />
+    <j:bind source="j:control.Data.FolderItems.ParentFolder.ParentList.SelectedContentType" target="j:control.Data.FolderItems.ContentType" 
+            active="jc:Operations.IsNull(j:control.Data.FolderItems.ContentType)" />
+    <j:bind target="j:control.Data.FolderItems.ParentFolder.ParentList.SelectedContentType" source="j:control.Data.FolderItems.ContentType"
+            active="jc:Operations.IsNotNull(j:control.Data.FolderItems.ContentType)" />
+    <j:bind source="j:control.Data.FolderItems.Fields"
+        target="j:control.Fields" active="j:control.Data.IsActive"/>
+    <j:bind source="j:control.Data.FolderItems.LoadItems(j:control.Data.FolderItems.ParentFolder.ParentList.Detail.Value, j:control.Data.FolderItems.ContentType.Detail.Value)"
+        target="j:variable.items" active="j:control.Data.IsActive"/>
+    <j:bind source="j:variable.items.Value" target="j:control.Data.Items" active="j:control.Data.IsActive" />
+    <j:bind source="viewModels:ItemValuesDataSource(j:control.Data.SelectedItem, j:control.Data.FolderItems.Fields)" 
+        target="j:control.Data.DetailListView.Source" active="jc:Operations.IsNotNull(j:control.Data.SelectedItem)" />
+    <j:bind source="viewModels:PermissionsDataSource(j:control.Data.SelectedItem.EffectiveBasePermissions)" 
+        target="j:control.Data.PermissionsListView.Source" active="jc:Operations.IsNotNull(j:control.Data.SelectedItem)" />
+   </body>
+</html>

@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:sys="http://jscriptsuite.com/templates/clr/System,mscorlib"
+  xmlns:esys="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Sys"
+  xmlns:sp="http://jscriptsuite.com/templates/clr/James.SharePoint,James.SharePoint"
+  xmlns:ui="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Webs.UI"
+  xmlns:emn="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Nodes"
+  xmlns:j="http://jscriptsuite.com/templates"
+  xmlns:dp="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.DataBinding.Providers,JScriptSuite.JScriptLib"      
+  xmlns:jc="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.Common,JScriptSuite.JScriptLib"
+  xmlns:lazy="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Lazy,JScriptSuite.JScriptLib"
+  xmlns:controls="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls,JScriptSuite.JScriptLib">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title></title>
+</head>
+<body j:type="ui:WebGeneralPane">
+  <table cellpadding="4" cellspacing="0" class="properties">
+      <tbody>
+        <tr>
+          <th>Url</th>
+          <td j:control="controls:Control() { InnerText = j:control.Data.Url }"></td>
+        </tr>
+        <tr><th>Title</th><td j:control="controls:Control() { InnerText = j:control.Data.Title }"></td></tr>
+        <tr><th>Description</th><td j:control="controls:Control() { InnerText = j:control.Data.Detail.Value.Description }"></td></tr>
+        <tr><th>Language</th><td j:control="controls:Control() { InnerText = j:control.Data.Detail.Value.Language.ToString() }"></td></tr>
+        <tr>
+          <th>Theme</th>
+          <td j:control="controls:Control() { InnerText = j:control.Data.Detail.Value.Theme }"></td>
+        </tr>
+        <tr>
+          <th>ID</th>
+          <td j:control="controls:Control() { InnerText = j:control.Data.Detail.Value.ID.ToString() }"></td>
+        </tr>
+      </tbody>
+    </table>
+</body>
+</html>

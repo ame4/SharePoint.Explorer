@@ -1,0 +1,34 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:sys="http://jscriptsuite.com/templates/clr/System,mscorlib"
+  xmlns:lazy="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Lazy,JScriptSuite.JScriptLib"
+  xmlns:html="http://jscriptsuite.com/templates/clr/JScriptSuite.Html,JScriptSuite"                  
+  xmlns:emlui="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Lists.UI"
+  xmlns:dp="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.DataBinding.Providers,JScriptSuite.JScriptLib"    
+  xmlns:j="http://jscriptsuite.com/templates"
+  xmlns:sp="http://jscriptsuite.com/templates/clr/James.SharePoint,James.SharePoint"
+  xmlns:nodes="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Nodes"
+  xmlns:ui="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Webs.UI"
+  xmlns:jc="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.Common,JScriptSuite.JScriptLib"
+  xmlns:trees="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Trees,JScriptSuite.JScriptLib"
+  xmlns:controls="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls,JScriptSuite.JScriptLib"
+  xmlns:tabs="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Tabs,JScriptSuite.JScriptLib">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title></title>
+</head>
+<body j:type="ui:WebPane">
+  <j:variable name="selectedTabItem" type="tabs:TabItem"/>
+  <div style="height:100%; width:100%" j:control="tabs:TabStrip() { Selection.Data = j:variable.selectedTabItem }">
+    <j:collection target="TabItems">
+      <j:item source="tabs:TabItem() { 
+        Header = tabs:ImageTextTabHeaderItem() { 
+          Text = 'General'
+        },
+        Page = ui:WebGeneralPane() { 
+          Data = j:control.Data,
+          Element.Style.Overflow = html:StyleOverflow.Auto }}"/>
+    </j:collection>
+  </div>
+</body>
+</html>

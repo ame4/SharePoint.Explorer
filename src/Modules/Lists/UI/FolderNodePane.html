@@ -1,0 +1,39 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:sys="http://jscriptsuite.com/templates/clr/System,mscorlib"
+  xmlns:html="http://jscriptsuite.com/templates/clr/JScriptSuite.Html,JScriptSuite"      
+  xmlns:lazy="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Lazy,JScriptSuite.JScriptLib"
+  xmlns:ui="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Lists.UI"
+  xmlns:nodes="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Nodes"      
+  xmlns:j="http://jscriptsuite.com/templates"
+  xmlns:jc="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.Common,JScriptSuite.JScriptLib"
+  xmlns:dp="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.DataBinding.Providers,JScriptSuite.JScriptLib"          
+  xmlns:trees="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Trees,JScriptSuite.JScriptLib"
+  xmlns:controls="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls,JScriptSuite.JScriptLib"
+  xmlns:tabs="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Tabs,JScriptSuite.JScriptLib">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title></title>
+</head>
+<body j:type="ui:FolderNodePane">
+    <j:variable name="selectedTabItem" type="tabs:TabItem"/>
+    <div style="height:100%; width:100%" j:control="j:control.TabStrip { Selection.Data = j:variable.selectedTabItem }">
+      <j:collection target="TabItems">
+        <j:item source="tabs:TabItem() { Header = tabs:ImageTextTabHeaderItem() { Text = 'General' },
+          Page = ui:FolderGeneralPane() { 
+            Data = j:control.Data,
+            Element.Style.Overflow = html:StyleOverflow.Auto
+          }}"/>
+        <j:item source="tabs:TabItem() { Header = tabs:ImageTextTabHeaderItem() { Text = 'Items' },
+          Page = ui:ItemsPane() {
+            Lazy = j:control.Data.ParentList.ContentTypes,
+            Data = {
+               FolderItems = j:control.Data.FolderItems, 
+               IsActive = sys:Object.Equals(j:variable.selectedTabItem, j:target.target.target)
+            }
+          }
+        }"/>
+      </j:collection>
+    </div>
+</body>
+</html>

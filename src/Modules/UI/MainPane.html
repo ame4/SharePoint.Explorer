@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:sys="http://jscriptsuite.com/templates/clr/System,mscorlib"
+  xmlns:nodes="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Nodes"
+  xmlns:informations="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Informations"
+  xmlns:common="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Common"
+  xmlns:lists="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Lists.UI"
+  xmlns:ui="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.UI"
+  xmlns:emn="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Nodes"
+  xmlns:html="http://jscriptsuite.com/templates/clr/JScriptSuite.Html,JScriptSuite"            
+  xmlns:styles="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Styles,JScriptSuite.JScriptLib"      
+  xmlns:configurations="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Configurations"
+  xmlns:webs="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Webs.UI"
+  xmlns:j="http://jscriptsuite.com/templates"
+  xmlns:jc="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.Common,JScriptSuite.JScriptLib"
+  xmlns:dataBinding="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.DataBinding,JScriptSuite.JScriptLib"
+  xmlns:trees="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Trees,JScriptSuite.JScriptLib"
+  xmlns:buttons="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Buttons,JScriptSuite.JScriptLib"
+  xmlns:panes="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Panes,JScriptSuite.JScriptLib"
+  xmlns:splitters="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Splitters,JScriptSuite.JScriptLib"
+  xmlns:groupBoxes="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.GroupBoxes,JScriptSuite.JScriptLib"
+  xmlns:controls="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls,JScriptSuite.JScriptLib"
+  xmlns:windows="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Windows,JScriptSuite.JScriptLib"    
+  xmlns:tabs="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Tabs,JScriptSuite.JScriptLib">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body j:type="ui:MainPane">
+  <div style="display:none" j:control="styles:AllJScriptLibStyles()"></div>
+  <div style="display:none" j:control="ui:Styles()"></div>
+  <j:variable name="selectedNodeData" type="common:IExplorerNode"/>
+  <div style="background-color: white; width:100%;height:100%" j:control="splitters:Splitter&lt;panes:SplitPane&gt;(true, 0.25)">
+        <div tabindex="1" hidefocus="true" class="TreeView36" style='overflow:hidden;border-bottom:solid 1px #cccccc;border-left:solid 1px #cccccc' 
+            j:control="j:control.TreeView {
+              NodeSource = j:control.Data.RootNodes,
+              NodeClassName ='treeNodeWin7-20',
+              RowHeight = 36,
+              Selection.Data = j:variable.selectedNodeData {
+                DeepLink = j:control.Data.DeepLink
+              },
+             DataTemplate = {
+                Image = j:container.DataItem.Image,
+                Text = j:container.DataItem.Title,
+                Title = j:container.DataItem.Description
+             }
+            }">
+        </div>
+        <div style="overflow:hidden;position:relative">
+          <div style='overflow:auto;height:100%;width:100%' j:control="j:control.InfoTabStrip {
+                Element.Style.Display = jc:Operations.IsDisplayed(
+                    jc:Operations.Not(
+                        jc:Operations.Or(
+                            jc:Operations.CanCast&lt;emn:WebNode&gt;(j:variable.selectedNodeData),
+                            jc:Operations.CanCast&lt;emn:ListNode&gt;(j:variable.selectedNodeData),
+                            jc:Operations.CanCast&lt;emn:FolderNode&gt;(j:variable.selectedNodeData)
+                        )
+                    )
+                )
+              }">
+            <j:collection target="TabItems">
+              <j:item source="tabs:TabItem() { 
+                Header = tabs:ImageTextTabHeaderItem() { 
+                  Text = 'Information',
+                  Image = '/_layouts/images/info16by16.gif'
+                },
+                Page = informations:InformationPane() }"/>
+              <j:item source="tabs:TabItem() { 
+                Header = tabs:ImageTextTabHeaderItem() { 
+                  Text = 'Settings',
+                  Image = '/_layouts/images/zap16.gif'
+                },
+                Page = ui:SettingsPane() {
+                   Data = j:control.Data,
+                  Element.Style.Overflow = html:StyleOverflow.Auto
+                }}"/>
+            </j:collection>
+          </div>
+          <div style='overflow:auto;height:100%;width:100%' j:control="webs:WebPane() { 
+               Element.Style.Display = jc:Operations.IsDisplayed(jc:Operations.CanCast&lt;emn:WebNode&gt;(j:variable.selectedNodeData)),
+               Data = jc:Operations.TryCast&lt;emn:WebNode&gt;(j:variable.selectedNodeData)
+            }">
+          </div>
+          <div style='overflow:auto;height:100%;width:100%' j:control="j:control.ListNodePane { 
+               Element.Style.Display = jc:Operations.IsDisplayed(jc:Operations.CanCast&lt;emn:ListNode&gt;(j:variable.selectedNodeData)),
+               Data = jc:Operations.TryCast&lt;emn:ListNode&gt;(j:variable.selectedNodeData)
+            }">
+          </div>
+          <div style='overflow:auto;height:100%;width:100%' j:control="j:control.FolderNodePane { 
+               Element.Style.Display = jc:Operations.IsDisplayed(jc:Operations.CanCast&lt;emn:FolderNode&gt;(j:variable.selectedNodeData)),
+               Data = jc:Operations.TryCast&lt;emn:FolderNode&gt;(j:variable.selectedNodeData)
+            }">
+          </div>
+        </div>
+    </div>
+ </body>
+</html>

@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+xmlns:sys="http://jscriptsuite.com/templates/clr/System,mscorlib"
+xmlns:sp="http://jscriptsuite.com/templates/clr/James.SharePoint,James.SharePoint"
+xmlns:lazy="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Lazy,JScriptSuite.JScriptLib"
+xmlns:elc="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Lists.Components"
+xmlns:ui="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Lists.UI"
+xmlns:ecu="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Components.UI"
+xmlns:emc="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Common"
+xmlns:dp="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.DataBinding.Providers,JScriptSuite.JScriptLib"
+xmlns:interops="http://jscriptsuite.com/templates/clr/JScriptSuite.InteropServices,JScriptSuite"
+xmlns:j="http://jscriptsuite.com/templates"
+xmlns:jc="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.Common,JScriptSuite.JScriptLib"
+xmlns:providers="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.DataBinding.Providers,JScriptSuite.JScriptLib"
+xmlns:dropdowns="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.DropDowns,JScriptSuite.JScriptLib"
+xmlns:gridlayout="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.GridLayout,JScriptSuite.JScriptLib"
+xmlns:trees="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Trees,JScriptSuite.JScriptLib"
+xmlns:buttons="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Buttons,JScriptSuite.JScriptLib"
+xmlns:windows="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Windows,JScriptSuite.JScriptLib"
+xmlns:gridLayout="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.GridLayout,JScriptSuite.JScriptLib"      
+xmlns:controls="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls,JScriptSuite.JScriptLib">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title></title>
+</head>
+<body j:type="ui:ListItemEditorWindow">
+  <div j:control="gridLayout:GridLayoutPane() {
+        Rows = [ { Value = 40, Absolute = true }, { Value = 1 } ]       
+       }" style="width:100%;height:100%">
+      <div j:control="controls:Control() {
+           gridLayout:GridLayoutPane.RowBindings = [ gridLayout:UnitBinding(1, 1, false) { Style = j:target.target.Element.Style } ]
+           }" style="width:100%;overflow:auto">
+          <table cellpadding="0" cellspacing="0" class="properties">
+              <tbody>
+                  <tr>
+                      <th j:control="controls:Control()
+                          {
+                              InnerText = jc:Operations.IIF&lt;sp:ContentType&gt;(jc:Operations.IsNull(j:control.Data.ContentType), j:control.Data.DefaultContentType, j:control.Data.ContentType).Detail.Value.Fields.TryGetFieldById(sp:BuiltInFields.ContentType.ID).Title
+                          }">
+                      </th>
+                      <td>
+                        <span style='width:199px;height:16px;padding-left:1px;padding-top:1px;padding-bottom:1px;overflow:hidden;display:inline-block'
+                            j:control="dropdowns:DropDownList&lt;sp:ContentType&gt;()
+                                  {
+                                      ListBox.DataSource := j:control.Data.ContentTypes,
+                                      Value = j:control.Data.ContentType
+                                  }"></span>                                
+                      </td>
+                  </tr>
+              </tbody>
+              <tbody j:control="ui:ItemFieldsTable() { ListItem = j:control.Data.ListItem, ContentType = j:control.Data.ContentType.Detail.Value }">
+
+              </tbody>
+          </table>
+      </div>
+      <table cellpadding="0" cellspacing="0" class="messageBoxCommandBar" style="width:100%"
+              j:control="controls:Control() { ClassName = windows:MessageBoxSkin.Instance.CommandBarClass }">
+          <tbody>
+              <tr>
+                  <td style="text-align:right; vertical-align:middle">
+                      <span tabindex="1" j:control="buttons:ImageTextButton() 
+                          { 
+                              Execute = j:control.OK,
+                              Image = '/_layouts/images/save.gif',
+                              Text = windows:MessageBoxSkin.Instance.ButtonSkin(windows:DialogResult.OK).Text
+                          }">
+                      </span>
+                      <span tabindex="1" j:control="buttons:ImageTextButton() 
+                            { 
+                                Execute = j:control.Cancel,
+                                ImageClass = windows:MessageBoxSkin.Instance.ButtonSkin(windows:DialogResult.Cancel).ImageClass,
+                                Text = windows:MessageBoxSkin.Instance.ButtonSkin(windows:DialogResult.Cancel).Text
+                            }">
+                      </span>
+                  </td>
+              </tr>
+          </tbody>
+      </table>
+  </div>
+</body>
+</html>

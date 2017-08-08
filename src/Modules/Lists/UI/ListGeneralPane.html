@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:sys="http://jscriptsuite.com/templates/clr/System,mscorlib"
+  xmlns:esys="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Sys"
+  xmlns:sp="http://jscriptsuite.com/templates/clr/James.SharePoint,James.SharePoint"
+  xmlns:ui="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Lists.UI"
+  xmlns:j="http://jscriptsuite.com/templates"
+  xmlns:dp="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.DataBinding.Providers,JScriptSuite.JScriptLib"      
+  xmlns:jc="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.Common,JScriptSuite.JScriptLib"
+  xmlns:splitters="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Splitters,JScriptSuite.JScriptLib"
+  xmlns:lazy="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Lazy,JScriptSuite.JScriptLib"
+  xmlns:controls="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls,JScriptSuite.JScriptLib">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title></title>
+</head>
+<body j:type="ui:ListGeneralPane">
+  <div style="height: 100%; width: 100%; overflow: hidden"
+      j:control="splitters:Splitter(false, 0.5)">
+    <div style='overflow: auto; width:100%; height:100%'>
+      <table cellpadding="4" cellspacing="0" class="properties">
+        <tbody>
+          <tr>
+            <th>List</th>
+            <td j:control="controls:Control() { InnerText = j:control.Data.SelectedList.Title }"></td>
+          </tr>
+          <tr>
+            <th>ID</th>
+            <td j:control="controls:Control() { InnerText = j:control.Data.SelectedList.ID.ToString() }"></td>
+          </tr>
+          <tr>
+            <th>Description</th>
+            <td j:control="controls:Control() { InnerText = j:control.Data.SelectedList.Description }"></td>
+          </tr>
+          <tr>
+            <th>Version</th>
+            <td j:control="controls:Control() { InnerText = j:control.Data.SelectedList.Version.ToString() }"></td>
+          </tr>
+          <tr>
+            <th>Is Document Library</th>
+            <td j:control="controls:Control() { Element.Style.Visibility = jc:Operations.IsVisible(sys:Object.Equals(j:control.Data.SelectedList.BaseType, sp:BaseType.DocumentLibrary)) }">
+              <div style="width:20px;height:20px;background-image:url('/_layouts/images/check.gif');background-repeat:no-repeat"></div>
+            </td>
+          </tr>
+          <tr>
+            <th>EnableAttachments</th>
+            <td j:control="controls:Control() { Element.Style.Visibility = jc:Operations.IsVisible(j:control.Data.SelectedList.EnableAttachments) }">
+              <div style="width:20px;height:20px;background-image:url('/_layouts/images/check.gif');background-repeat:no-repeat"></div>
+            </td>
+          </tr>
+          <tr>
+            <th>AllowDeletion</th>
+            <td j:control="controls:Control() { Element.Style.Visibility = jc:Operations.IsVisible(j:control.Data.SelectedList.AllowDeletion) }">
+              <div style="width:20px;height:20px;background-image:url('/_layouts/images/check.gif');background-repeat:no-repeat"></div>
+            </td>
+          </tr>
+          <tr>
+            <th>AllowMultiResponses</th>
+            <td j:control="controls:Control() { Element.Style.Visibility = jc:Operations.IsVisible(j:control.Data.SelectedList.AllowMultiResponses) }">
+              <div style="width:20px;height:20px;background-image:url('/_layouts/images/check.gif');background-repeat:no-repeat"></div>
+            </td>
+          </tr>
+          <tr>
+            <th>EnableVersioning</th>
+            <td j:control="controls:Control() { Element.Style.Visibility = jc:Operations.IsVisible(j:control.Data.SelectedList.EnableVersioning) }">
+              <div style="width:20px;height:20px;background-image:url('/_layouts/images/check.gif');background-repeat:no-repeat"></div>
+            </td>
+          </tr>
+          <tr>
+            <th>Hidden</th>
+            <td j:control="controls:Control() { Element.Style.Visibility = jc:Operations.IsVisible(j:control.Data.SelectedList.Hidden) }">
+              <div style="width:20px;height:20px;background-image:url('/_layouts/images/check.gif');background-repeat:no-repeat"></div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style='overflow: hidden' j:control="ui:FieldsGrid(j:control.Data.FieldsEditor) {
+        DataSource = j:control.Data.FieldsEditor.FieldsListView.Target
+      }">
+    </div>
+  </div>
+  <j:bind source="j:control.Data.SelectedList.Detail.Value.Fields" target="j:control.Data.FieldsEditor.FieldsListView.Source" active="j:control.Data.IsActive" />
+</body>
+</html>

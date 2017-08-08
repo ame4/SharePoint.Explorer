@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{16CE239F-C8B2-49D0-AC28-06D2AD3454B0}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SharePoint.Explorer</RootNamespace>
+    <AssemblyName>SharePoint.Explorer</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Modules\Common\Activable.cs" />
+    <Compile Include="Modules\Common\DeepLink.cs" />
+    <Compile Include="Modules\Common\IExplorerNode.cs" />
+    <Compile Include="Modules\Common\ILoadingNode.cs" />
+    <Compile Include="Modules\Common\ITreeNode.cs" />
+    <Compile Include="Modules\Configurations\Configuration.cs" />
+    <Compile Include="Modules\Informations\InformationPane.cs" />
+    <Compile Include="Modules\Lists\ListItemsDropUtility.cs" />
+    <Compile Include="Modules\Lists\UI\ContentTypesPane.html.cs" />
+    <Compile Include="Modules\Lists\UI\FieldsGrid.cs" />
+    <Compile Include="Modules\Lists\UI\FolderGeneralPane.html.cs" />
+    <Compile Include="Modules\Lists\UI\FolderNodePane.html.cs" />
+    <Compile Include="Modules\Lists\UI\ItemFieldsTable.cs" />
+    <Compile Include="Modules\Lists\UI\ItemsOverviewDropTarget.cs" />
+    <Compile Include="Modules\Lists\UI\ItemsOverviewFileDropTarget.cs" />
+    <Compile Include="Modules\Lists\UI\ItemsPane.html.cs" />
+    <Compile Include="Modules\Lists\UI\ListGeneralPane.cs" />
+    <Compile Include="Modules\Lists\UI\ListItemEditorWindow.html.cs" />
+    <Compile Include="Modules\Lists\UI\ListNodePane.html..cs" />
+    <Compile Include="Modules\Lists\UI\SchemaXmlEditorWindow.html.cs" />
+    <Compile Include="Modules\Lists\UI\TabStripPane.cs" />
+    <Compile Include="Modules\Lists\UI\ViewsPane.html.cs" />
+    <Compile Include="Modules\Lists\ViewModels\ActivableListViewModel.cs" />
+    <Compile Include="Modules\Lists\ViewModels\ContentTypeEditor.cs" />
+    <Compile Include="Modules\Lists\ViewModels\ContentTypesViewModel.cs" />
+    <Compile Include="Modules\Lists\ViewModels\FieldEditor.cs" />
+    <Compile Include="Modules\Lists\ViewModels\FieldsEditor.cs" />
+    <Compile Include="Modules\Lists\ViewModels\FolderItems.cs" />
+    <Compile Include="Modules\Lists\ViewModels\ItemsViewModel.cs" />
+    <Compile Include="Modules\Lists\ViewModels\ItemValuesDataSource.cs" />
+    <Compile Include="Modules\Lists\ViewModels\ListGeneralViewModel.cs" />
+    <Compile Include="Modules\Lists\ViewModels\ListItemEditor.cs" />
+    <Compile Include="Modules\Lists\ViewModels\ListItemsDragSource.cs" />
+    <Compile Include="Modules\Lists\ViewModels\PermissionsDataSource.cs" />
+    <Compile Include="Modules\Lists\ViewModels\SchemaXmlEditor.cs" />
+    <Compile Include="Modules\Lists\ViewModels\ViewsViewModel.cs" />
+    <Compile Include="Modules\Nodes\ExplorerNodeList.cs" />
+    <Compile Include="Modules\Nodes\FolderNode.cs" />
+    <Compile Include="Modules\Nodes\InformationNode.cs" />
+    <Compile Include="Modules\Nodes\ListItemsNodeDropTarget.cs" />
+    <Compile Include="Modules\Nodes\ListNode.cs" />
+    <Compile Include="Modules\Nodes\ListsNode.cs" />
+    <Compile Include="Modules\Nodes\NodeUtil.cs" />
+    <Compile Include="Modules\Nodes\RootNode.cs" />
+    <Compile Include="Modules\Nodes\RootNodes.cs" />
+    <Compile Include="Modules\Nodes\TreeViewFileDropTarget.cs" />
+    <Compile Include="Modules\Nodes\Uploader.cs" />
+    <Compile Include="Modules\Nodes\WebNode.cs" />
+    <Compile Include="Modules\Nodes\WebNodeDragSource.cs" />
+    <Compile Include="Modules\Nodes\WebNodeDragTarget.cs" />
+    <Compile Include="Modules\Nodes\WebsNode.cs" />
+    <Compile Include="Modules\UI\AddRootWindow.html.cs" />
+    <Compile Include="Modules\UI\MainPane.html.cs" />
+    <Compile Include="Modules\UI\SettingsPane.html.cs" />
+    <Compile Include="Modules\UI\Styles.html.cs" />
+    <Compile Include="Modules\ViewModels\AddRoot.cs" />
+    <Compile Include="Modules\ViewModels\App.cs" />
+    <Compile Include="Modules\ViewModels\DeepLinkViewModel.cs" />
+    <Compile Include="Modules\Webs\UI\WebGeneralPane.html.cs" />
+    <Compile Include="Modules\Webs\UI\WebPane.html.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Modules\Informations\Information.html" />
+    <EmbeddedResource Include="Modules\Lists\UI\ContentTypesPane.html" />
+    <EmbeddedResource Include="Modules\Lists\UI\FolderGeneralPane.html" />
+    <EmbeddedResource Include="Modules\Lists\UI\FolderNodePane.html" />
+    <EmbeddedResource Include="Modules\Lists\UI\ItemsPane.html" />
+    <EmbeddedResource Include="Modules\Lists\UI\ListGeneralPane.html" />
+    <EmbeddedResource Include="Modules\Lists\UI\ListItemEditorWindow.html" />
+    <EmbeddedResource Include="Modules\Lists\UI\ListNodePane.html" />
+    <EmbeddedResource Include="Modules\Lists\UI\SchemaXmlEditorWindow.html" />
+    <EmbeddedResource Include="Modules\Lists\UI\ViewsPane.html" />
+    <EmbeddedResource Include="Modules\UI\AddRootWindow.html" />
+    <EmbeddedResource Include="Modules\UI\MainPane.html" />
+    <EmbeddedResource Include="Modules\UI\SettingsPane.html" />
+    <EmbeddedResource Include="Modules\UI\Styles.html" />
+    <EmbeddedResource Include="Modules\Webs\UI\WebGeneral.html" />
+    <EmbeddedResource Include="Modules\Webs\UI\WebPane.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="James.SharePoint, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8a2794a72fa6407c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\James.SharePoint.dll</HintPath>
+    </Reference>
+    <Reference Include="JScriptSuite, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7efe0325f6eb7fd2, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\JScriptSuite.dll</HintPath>
+    </Reference>
+    <Reference Include="JScriptSuite.JScriptLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8a2794a72fa6407c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\JScriptSuite.JScriptLib.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

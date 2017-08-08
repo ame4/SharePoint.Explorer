@@ -1,0 +1,249 @@
+<?xml version="1.0"?>
+<doc>
+  <assembly>
+    <name>JScriptSuite</name>
+  </assembly>
+  <members>
+    <member name="T:JScriptSuite.Common.AssertExtensions">
+      <summary>
+            Verifies conditions in unit tests using true/false propositions.
+            </summary>
+    </member>
+    <member name="M:JScriptSuite.Common.AssertExtensions.Assert(System.Boolean,System.String)">
+      <summary>
+            Verifies that the specified condition is true.
+            The assertion fails if the condition is false.
+            </summary>
+      <param name="condition">The condition to verify is true</param>
+      <param name="text">A message to display if the assertion fails.</param>
+    </member>
+    <member name="M:JScriptSuite.Common.AssertExtensions.Assert(System.Boolean,System.String,System.Object[])">
+      <summary>
+            Verifies that the specified condition is true. The assertion fails if the condition is false.
+            </summary>
+      <param name="condition">The condition to verify is true</param>
+      <param name="format">A format to generate message to display if the assertion fails.</param>
+      <param name="parameters">Parameters to format text</param>
+    </member>
+    <member name="M:JScriptSuite.Common.AssertExtensions.NotNull(System.Object,System.String)">
+      <summary>
+            Verifies that the specified object is not null. The assertion fails if it isnull.
+            </summary>
+      <param name="o">The object to verify is not null.</param>
+      <param name="text">
+      </param>
+    </member>
+    <member name="M:JScriptSuite.Html5.IO.ByteArray.Set(JScriptSuite.Html5.IO.ByteArray,System.Int32)">
+      <summary>
+            If the input array is a TypedArray, the two arrays may use the same underlying ArrayBuffer. 
+            In this situation, setting the values takes place as if all the data is first copied into 
+            a temporary buffer that does not overlap either of the arrays, and then the data from the 
+            temporary buffer is copied into the current array.
+            If the offset plus the length of the given array is out of range for the current TypedArray, an exception is raised.
+            </summary>
+      <param name="source">A typed or untyped array of values to set.</param>
+      <param name="targetIndex">The index in the current array at which the values are to be written.</param>
+    </member>
+    <member name="M:JScriptSuite.Html5.IO.ByteArray.CopyTo(JScriptSuite.Html5.IO.ByteArray,System.Int32)">
+      <summary>
+            Copies all the elements of the current array to the specified <paramref name="target" /> starting 
+            at the specified destination array <paramref name="targetIndex" />.
+            </summary>
+      <param name="target">the destination of the elements copied from the current array</param>
+      <param name="targetIndex">represents the <paramref name="targetIndex" /> in <paramref name="target" /> at which copying begins.</param>
+    </member>
+    <member name="T:JScriptSuite.Html.HtmlAnchor">
+      <summary>
+            Designates the destination of a hypertext link.
+            </summary>
+    </member>
+    <member name="P:JScriptSuite.Html.HtmlAnchor.Target">
+      <summary>
+            Sets or retrieves the window or frame at which to target content.
+            </summary>
+    </member>
+    <member name="P:JScriptSuite.Html.HtmlAnchor.Href">
+      <summary>
+            Sets or retrieves a destination URL or an anchor point. 
+            </summary>
+    </member>
+    <member name="T:JScriptSuite.InteropServices.JArray`1">
+      <summary>
+            typed Javascript array.
+            </summary>
+      <typeparam name="T">Item type</typeparam>
+    </member>
+    <member name="M:JScriptSuite.InteropServices.JArray`1.#ctor">
+      <summary>
+            Creates new instance of typed Javascript array.
+            </summary>
+    </member>
+    <member name="M:JScriptSuite.InteropServices.JArray`1.#ctor(System.Int32)">
+      <summary>
+            Creates new instance of typed Javascript array and specifies array length
+            </summary>
+      <param name="length">Array length.</param>
+    </member>
+    <member name="T:JScriptSuite.Remoting.ISender">
+      <summary>
+            protocol and metod specific package builder and and sender
+            </summary>
+    </member>
+    <member name="M:JScriptSuite.Remoting.ISender.Send(System.Action,System.Action{System.Exception})">
+      <summary>
+            build protocol and method specific package and send it
+            </summary>
+      <param name="success">callback to recieve responce</param>
+      <param name="failed">exception handler</param>
+    </member>
+    <member name="T:JScriptSuite.Remoting.ISerializer">
+      <summary>
+            untyped serializer
+            </summary>
+    </member>
+    <member name="M:JScriptSuite.Remoting.ISerializer.StartSerialize(System.String,System.Boolean,System.String)">
+      <summary>
+            start serializing of member or array item
+            </summary>
+      <param name="name">member name or name of array item</param>
+      <param name="memberOrElement">true if member, false if array item</param>
+      <param name="typeNamespace">type namespace uri</param>
+    </member>
+    <member name="M:JScriptSuite.Remoting.ISerializer.EndSerialize(System.String,System.Boolean,System.String)">
+      <summary>
+            start serializing of member or array item
+            </summary>
+      <param name="name">member name or name of array item</param>
+      <param name="memberOrElement">true if member, false if array item</param>
+      <param name="typeNamespace">type namespace uri</param>
+    </member>
+    <member name="M:JScriptSuite.Remoting.ISerializer.StartSerializeObject">
+      <summary>
+            Start of object serializing
+            </summary>
+    </member>
+    <member name="M:JScriptSuite.Remoting.ISerializer.EndSerializeObject">
+      <summary>
+            End of object serializing
+            </summary>
+    </member>
+    <member name="M:JScriptSuite.Remoting.ISerializer.StartSerializeArray">
+      <summary>
+            Start of array serializing
+            </summary>
+    </member>
+    <member name="M:JScriptSuite.Remoting.ISerializer.EndSerializeArray">
+      <summary>
+            End of array serializing
+            </summary>
+    </member>
+    <member name="M:JScriptSuite.Remoting.ISerializer.SerializeNull">
+      <summary>
+            serilaize null value
+            </summary>
+    </member>
+    <member name="T:JScriptSuite.Remoting.ISerializer`1">
+      <summary>
+            typed serialzer
+            </summary>
+      <typeparam name="TData">type of srializable date</typeparam>
+    </member>
+    <member name="M:JScriptSuite.Remoting.ISerializer`1.Serialize(`0)">
+      <summary>
+            serialize this data
+            </summary>
+      <param name="data">data to serialize</param>
+    </member>
+    <member name="T:JScriptSuite.Remoting.IMembersSerializer`1">
+      <summary>
+            serialilize all members of <typeparamref name="TData" /> type
+            </summary>
+      <typeparam name="TData">members of this type will be serialized</typeparam>
+    </member>
+    <member name="M:JScriptSuite.Remoting.IMembersSerializer`1.SerializeMembers(`0)">
+      <summary>
+            serialize all members of <paramref name="data" /></summary>
+      <param name="data">members of this objects will be serialized</param>
+    </member>
+    <member name="T:JScriptSuite.Remoting.IDeserializer">
+      <summary>
+            untyped deserializer
+            </summary>
+    </member>
+    <member name="M:JScriptSuite.Remoting.IDeserializer.StartDeserializeMember(System.Object,System.String,System.String)">
+      <summary>
+            Start deserialize member
+            </summary>
+      <param name="owner">handler to recieve deserialized member. <paramref name="owner" /> will be provided by <c>StartDeserializeObject</c> or <c>StartDeserializeArray</c></param>
+      <param name="memberName">member name</param>
+      <param name="typeNamespace">namespece URI</param>
+    </member>
+    <member name="M:JScriptSuite.Remoting.IDeserializer.StartDeserializeObject">
+      <summary>
+            Start deserialize object. Provide <c>owner</c> for <c>StartDeserializeMember</c></summary>
+      <returns>
+        <c>owner</c> for <c>StartDeserializeMember</c><R><c>owner</c> for <c>StartDeserializeMember</c><R /></R></returns>
+      <R>
+        <c>owner</c> for <c>StartDeserializeMember</c><R><c>owner</c> for <c>StartDeserializeMember</c><R /></R></R>
+    </member>
+    <member name="M:JScriptSuite.Remoting.IDeserializer.StartDeserializeArray(System.String)">
+      <summary>
+            Start array deserializing. Provide <c>owner</c> and <c>memberName</c> for <c>StartDeserializeMember</c></summary>
+      <param name="elementName">
+        <c>memberName</c> for <c>StartDeserializeMember</c></param>
+      <returns>
+        <c>owner</c> for <c>StartDeserializeMember</c><R><c>owner</c> for <c>StartDeserializeMember</c><R /></R></returns>
+    </member>
+    <member name="M:JScriptSuite.Remoting.IDeserializer.GetArrayLength(System.Object)">
+      <summary>
+            Retunrs array length to create array in response
+            </summary>
+      <param name="source">Protocol specific object</param>
+      <returns>array length<R>array length<R /></R></returns>
+    </member>
+    <member name="M:JScriptSuite.Remoting.IDeserializer.StartDeserializeElement(System.Object,System.Int32)">
+      <summary>
+            Start array item deserializing
+            </summary>
+      <param name="source">Protocol specific object</param>
+      <param name="index">item index</param>
+    </member>
+    <member name="T:JScriptSuite.Remoting.InstanceFactory">
+      <summary>
+            Service proxy factory
+            </summary>
+    </member>
+    <member name="M:JScriptSuite.Remoting.InstanceFactory.CreateService``3(System.Func{JScriptSuite.Remoting.ISenderInfo{``1,``2},JScriptSuite.Remoting.ISender})">
+      <summary>
+            Create object which implement <typeparamref name="TService" /> interface (or all abstract methods of <typeparamref name="TService" /> type.
+            </summary>
+      <typeparam name="TService">Methods of this interface (abstract type) have to be implemented</typeparam>
+      <typeparam name="TSerializer">Type of this class serializes request</typeparam>
+      <typeparam name="TDeserializer">Type of this class deserializes response</typeparam>
+      <param name="senderFactory">Create <c>ISender</c> obgect to send request and recieve response</param>
+      <returns>created <typeparamref name="TService" /> proxy<R>created <typeparamref name="TService" /> proxy<R /></R></returns>
+    </member>
+  </members>
+</doc>mary>
+            Service proxy factory
+            </summary>
+    </member>
+    <member name="M:JScriptSuite.Remoting.InstanceFactory.CreateService``3(System.Func{JScriptSuite.Remoting.ISenderInfo{``1,``2},JScriptSuite.Remoting.ISender})">
+      <summary>
+            Create object which implement <typeparamref name="TService" /> interface (or all abstract methods of <typeparamref name="TService" /> type.
+            </summary>
+      <typeparam name="TService">Methods of this interface (abstract type) have to be implemented</typeparam>
+      <typeparam name="TSerializer">Type of this class serializes request</typeparam>
+      <typeparam name="TDeserializer">Type of this class deserializes response</typeparam>
+      <param name="senderFactory">Create <c>ISender</c> obgect to send request and recieve response</param>
+      <returns>created <typeparamref name="TService" /> proxy<R>created <typeparamref name="TService" /> proxy<R /></R></returns>
+    </member>
+  </members>
+</doc>t type) have to be implemented</typeparam>
+            <typeparam name="TSerializer">Type of this class serializes request</typeparam>
+            <typeparam name="TDeserializer">Type of this class deserializes response</typeparam>
+            <param name="senderFactory">Create <c>ISender</c> obgect to send request and recieve response</param>
+            <returns>created <typeparamref name="TService"/> proxy</returns>
+        </member>
+    </members>
+</doc>

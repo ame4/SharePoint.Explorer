@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:sys="http://jscriptsuite.com/templates/clr/System,mscorlib"
+  xmlns:nodes="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Nodes"
+  xmlns:informations="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Informations"
+  xmlns:lists="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Lists.UI"
+  xmlns:ui="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.UI"
+  xmlns:emn="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Nodes"
+  xmlns:webParts="http://jscriptsuite.com/templates/clr/James.SharePoint.WebParts,James.SharePoint"
+  xmlns:configurations="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Configurations"
+  xmlns:webs="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Webs"
+  xmlns:j="http://jscriptsuite.com/templates"
+  xmlns:jc="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.Common,JScriptSuite.JScriptLib"
+  xmlns:trees="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Trees,JScriptSuite.JScriptLib"
+  xmlns:buttons="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Buttons,JScriptSuite.JScriptLib"
+  xmlns:groupBoxes="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.GroupBoxes,JScriptSuite.JScriptLib"
+  xmlns:controls="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls,JScriptSuite.JScriptLib"
+  xmlns:windows="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Windows,JScriptSuite.JScriptLib"    
+  xmlns:tabs="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Tabs,JScriptSuite.JScriptLib">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body j:type="ui:SettingsPane">
+  <table cellpadding="0" cellspacing="0">
+    <tbody>
+    <tr>
+      <td style="padding:4px" j:control="webParts:ScreenConfigurationPane() { Data = j:control.Data.RootNodes.Configuration.Screen }">
+      </td>
+    </tr>
+    <tr>
+      <td style="padding:4px">                    
+        <table cellpading="0" cellspacing="0" class="properties" j:control="groupBoxes:GroupBox() { Text = 'Display current'}">
+          <tbody>
+            <tr>
+              <td>
+                <input type="radio" j:control="buttons:OptionBox&lt;configurations:DisplayCurrentMode?&gt;() { Key = configurations:DisplayCurrentMode.None, Value = j:control.Data.RootNodes.Configuration.DisplayCurrent }"/>
+              </td>
+              <th>
+                <span j:control="buttons:OptionLabel&lt;configurations:DisplayCurrentMode?&gt;() { Key = configurations:DisplayCurrentMode.None, Value = j:control.Data.RootNodes.Configuration.DisplayCurrent }">None</span>
+              </th>
+            </tr>
+            <tr>
+              <td>
+                <input type="radio" j:control="buttons:OptionBox&lt;configurations:DisplayCurrentMode?&gt;() { Key = configurations:DisplayCurrentMode.Web, Value = j:control.Data.RootNodes.Configuration.DisplayCurrent }"/>
+              </td>
+              <th>
+                <span j:control="buttons:OptionLabel&lt;configurations:DisplayCurrentMode?&gt;() { Key = configurations:DisplayCurrentMode.Web, Value = j:control.Data.RootNodes.Configuration.DisplayCurrent }">Web</span>
+              </th>
+            </tr>
+            <tr>
+              <td>
+                <input type="radio" j:control="buttons:OptionBox&lt;configurations:DisplayCurrentMode?&gt;() { Key = configurations:DisplayCurrentMode.Site, Value = j:control.Data.RootNodes.Configuration.DisplayCurrent }"/>
+              </td>
+              <th>
+                <span j:control="buttons:OptionLabel&lt;configurations:DisplayCurrentMode?&gt;() { Key = configurations:DisplayCurrentMode.Site, Value = j:control.Data.RootNodes.Configuration.DisplayCurrent }">Site</span>
+              </th>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:right; padding-left:4px; white-space:nowrap">
+        <span tabindex="1"
+          j:control="buttons:ImageTextButton() 
+              { 
+                  Execute = j:control.Data.SaveConfiguration,
+                  Image = '/_layouts/images/save.gif',
+                  Text = 'Save Settings'
+              }">
+        </span>
+        <span style="margin-left:10px" tabindex="1" j:control="buttons:ImageTextButton() 
+            { 
+                Execute = j:control.Data.LoadConfiguration,
+                Image = '/_layouts/images/refresh.gif',
+                Text = 'Reload Settings'
+            }">
+        </span>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</body>
+</html>
