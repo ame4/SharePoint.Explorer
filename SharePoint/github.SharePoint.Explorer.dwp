@@ -27,7 +27,7 @@
   <TypeName>Microsoft.SharePoint.WebPartPages.SimpleFormWebPart</TypeName>
   <Content xmlns="http://schemas.microsoft.com/WebPart/v2/SimpleForm">
     <![CDATA[
-<script type="text/javascript" src="https://rawgit.com/ame4/SharePoint.Explorer/master/SharePoint/SharePoint.Explorer.js"></script>
+<script type="text/javascript" src="https://ame4.github.io/SharePoint.Explorer/SharePoint/SharePoint.Explorer.js"></script>
 <script type="text/javascript">
 StartExplorer();
 </script>]]></Content>

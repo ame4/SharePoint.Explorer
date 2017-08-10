@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharePoint.Explorer", "Shar
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharePoint", "SharePoint", "{13554FCA-8F63-469C-ACD7-86F972A70E23}"
 	ProjectSection(SolutionItems) = preProject
-		..\SharePoint\Rawgit.SharePoint.Explorer.dwp = ..\SharePoint\Rawgit.SharePoint.Explorer.dwp
+		..\SharePoint\github.SharePoint.Explorer.dwp = ..\SharePoint\github.SharePoint.Explorer.dwp
 		..\SharePoint\SharePoint.Explorer.dwp = ..\SharePoint\SharePoint.Explorer.dwp
 		..\SharePoint\SharePoint.Explorer.js = ..\SharePoint\SharePoint.Explorer.js
 	EndProjectSection
