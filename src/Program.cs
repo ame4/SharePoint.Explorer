@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace SharePoint.Explorer
 {
@@ -25,6 +26,7 @@ namespace SharePoint.Explorer
                 .AddPage(host, "SharePoint.Explorer")
                 .Add(App.Start, "StartExplorer")
                 .Navigate();
+
             host.Run();
         }
     }

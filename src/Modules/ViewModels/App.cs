@@ -21,6 +21,7 @@ using JScriptSuite.JScriptLib.UI.Controls.Windows;
 using JScriptSuite.JScriptLib.Html;
 using SharePoint.Explorer.Modules.Nodes;
 using JScriptSuite.InteropServices;
+using System.Threading;
 
 namespace SharePoint.Explorer.ViewModels
 {
@@ -42,9 +43,23 @@ namespace SharePoint.Explorer.ViewModels
             HtmlWindow.Current.AdviseLoad(Load);
         }
 
-        public static void Start()
+        internal static void Start()
         {
             new App();
+        }
+
+        internal static async void StartExternal()
+        {
+            Web web = new Web() { Url = "http://team.bluebridge.de/personal/amedovoj" };
+            try
+            {
+                WebDetail detail = await web.Detail.Get(CancellationToken.None);
+            }
+            catch(Exception e)
+            {
+                throw e;
+            }
+
         }
 
         void Load()
