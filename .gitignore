@@ -24,3 +24,4 @@ _ReSharper*/
 *.dll
 *.zip
 /src/.vs/config
+*.ide
