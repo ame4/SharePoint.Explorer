@@ -27,7 +27,6 @@ namespace SharePoint.Explorer.Modules.Nodes
 
         readonly static DependencyProperty<bool> isSite = DependencyProperty<bool>.Register(typeof(RootNode));
 
-        [DataMember]
         public bool IsSite
         {
             get
@@ -41,7 +40,6 @@ namespace SharePoint.Explorer.Modules.Nodes
             }
         }
 
-        [DataMember]
         public new string Title
         {
             get
@@ -55,7 +53,6 @@ namespace SharePoint.Explorer.Modules.Nodes
             }
         }
 
-        [DataMember]
         public new string Url
         {
             get

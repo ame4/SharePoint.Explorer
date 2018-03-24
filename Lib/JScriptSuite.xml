@@ -186,7 +186,7 @@
       <R>
         <c>owner</c> for <c>StartDeserializeMember</c><R><c>owner</c> for <c>StartDeserializeMember</c><R /></R></R>
     </member>
-    <member name="M:JScriptSuite.Remoting.IDeserializer.StartDeserializeArray(System.String)">
+    <member name="M:JScriptSuite.Remoting.IDeserializer.StartDeserializeArray(System.String,System.String)">
       <summary>
             Start array deserializing. Provide <c>owner</c> and <c>memberName</c> for <c>StartDeserializeMember</c></summary>
       <param name="elementName">
@@ -224,8 +224,7 @@
       <returns>created <typeparamref name="TService" /> proxy<R>created <typeparamref name="TService" /> proxy<R /></R></returns>
     </member>
   </members>
-</doc>mary>
-            Service proxy factory
+</doc>     Service proxy factory
             </summary>
     </member>
     <member name="M:JScriptSuite.Remoting.InstanceFactory.CreateService``3(System.Func{JScriptSuite.Remoting.ISenderInfo{``1,``2},JScriptSuite.Remoting.ISender})">

@@ -11,7 +11,6 @@ namespace SharePoint.Explorer.Modules.Common
     public class DeepLink : DependencyObject, IEquatable<DeepLink>
     {
         readonly static DependencyProperty<NodeType> nodeType = DependencyProperty<NodeType>.Register(typeof(DeepLink));
-        [DataMember]
         public NodeType NodeType
         {
             get
@@ -28,7 +27,6 @@ namespace SharePoint.Explorer.Modules.Common
 
 
         readonly static DependencyProperty<string> webUrl = DependencyProperty<string>.Register(typeof(DeepLink));
-        [DataMember]
         public string WebUrl
         {
             get
@@ -43,7 +41,6 @@ namespace SharePoint.Explorer.Modules.Common
         }
 
         readonly static DependencyProperty<Guid?> listId = DependencyProperty<Guid?>.Register(typeof(DeepLink));
-        [DataMember]
         public Guid? ListId
         {
             get
@@ -58,7 +55,6 @@ namespace SharePoint.Explorer.Modules.Common
         }
 
         readonly static DependencyProperty<string> folderUrl = DependencyProperty<string>.Register(typeof(DeepLink));
-        [DataMember]
         public string FolderUrl
         {
             get
@@ -74,7 +70,6 @@ namespace SharePoint.Explorer.Modules.Common
 
 
         readonly static DependencyProperty<int> tabItemIndex = DependencyProperty<int>.Register(typeof(DeepLink));
-        [DataMember]
         public int TabItemIndex
         {
             get
@@ -89,7 +84,6 @@ namespace SharePoint.Explorer.Modules.Common
         }
 
         readonly static DependencyProperty<string> contentTypeId = DependencyProperty<string>.Register(typeof(DeepLink));
-        [DataMember]
         public string ContentTypeId
         {
             get

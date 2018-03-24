@@ -31,7 +31,7 @@ namespace SharePoint.Explorer.ViewModels
             {
                 try
                 {
-                    lastReceived = JsonSerializing.Deserialize<DeepLink>(hash.Substring(1)); // ignore #
+                    lastReceived = JsonDeserializer.Deserialize<DeepLink>(hash.Substring(1)); // ignore #
                 }
                 catch
                 {
@@ -46,7 +46,7 @@ namespace SharePoint.Explorer.ViewModels
                 {
                     try
                     {
-                        lastReceived = JsonSerializing.Deserialize<DeepLink>(hash); // ignore #
+                        lastReceived = JsonDeserializer.Deserialize<DeepLink>(hash); // ignore #
                     }
                     catch
                     {
@@ -66,7 +66,7 @@ namespace SharePoint.Explorer.ViewModels
                 DeepLink deepLink;
                 try
                 {
-                    deepLink = JsonSerializing.Deserialize<DeepLink>(hash.Substring(1));
+                    deepLink = JsonDeserializer.Deserialize<DeepLink>(hash.Substring(1));
                 }
                 catch
                 {
@@ -113,7 +113,7 @@ namespace SharePoint.Explorer.ViewModels
             if(lastReceived != null)
             {
                 deepLink = new DeepLink(lastReceived);
-                hash = JsonSerializing.Serialize<DeepLink>(deepLink);
+                hash = JsonSerializer.Serialize<DeepLink>(deepLink);
             }
 
             HtmlWindow.Current.Location.Hash = hash;

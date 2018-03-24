@@ -40,6 +40,7 @@
     <Compile Include="Modules\Common\ILoadingNode.cs" />
     <Compile Include="Modules\Common\ITreeNode.cs" />
     <Compile Include="Modules\Configurations\Configuration.cs" />
+    <Compile Include="Modules\Configurations\RootsObservableList.cs" />
     <Compile Include="Modules\Informations\InformationPane.cs" />
     <Compile Include="Modules\Lists\ListItemsDropUtility.cs" />
     <Compile Include="Modules\Lists\UI\ContentTypesPane.html.cs" />
@@ -148,6 +149,7 @@
       <HintPath>..\Lib\JScriptSuite.JScriptLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Runtime.Serialization" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

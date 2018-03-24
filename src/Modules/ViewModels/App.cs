@@ -114,7 +114,7 @@ namespace SharePoint.Explorer.ViewModels
 
         internal async void SaveConfiguration()
         {
-            string json = JsonSerializing.Serialize(RootNodes.Configuration);
+            string json = JsonSerializer.Serialize(RootNodes.Configuration);
             if(await LazyWindow.ShowWaiting("Saving configuration...",
                 async delegate()
                 {
@@ -141,7 +141,7 @@ namespace SharePoint.Explorer.ViewModels
             Configuration<RootNode> configuration = null;
             try
             {
-                configuration = JsonSerializing.Deserialize<Configuration<RootNode>>(webPart.Settings);
+                configuration = JsonDeserializer.Deserialize<Configuration<RootNode>>(webPart.Settings);
             }
             catch (Exception e)
             {
@@ -165,7 +165,7 @@ namespace SharePoint.Explorer.ViewModels
 
             if(configuration.Roots == null)
             {
-                configuration.Roots = new ObservableList<RootNode>();
+                configuration.Roots = new RootsObservableList<RootNode>();
             }
 
             return configuration;

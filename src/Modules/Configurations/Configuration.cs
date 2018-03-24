@@ -17,13 +17,10 @@ namespace SharePoint.Explorer.Modules.Configurations
             displayCurrentMode = new ObservableProperty<DisplayCurrentMode?>(this);
         }
 
-        [DataMember]
         public ScreenConfiguration Screen;
 
-        [DataMember(null, "Root")]
-        public ObservableList<TRootNode> Roots;
+        public RootsObservableList<TRootNode> Roots;
 
-        [DataMember]
         public DisplayCurrentMode? DisplayCurrent
         {
             get

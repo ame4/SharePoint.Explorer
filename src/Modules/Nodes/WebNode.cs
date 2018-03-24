@@ -13,6 +13,7 @@ using JScriptSuite.JScriptLib.UI.Controls.Trees;
 using JScriptSuite.Html;
 using JScriptSuite.JScriptLib.DataBinding.Providers.DependencyObjects;
 using JScriptSuite.JScriptLib.DataBinding.Providers.Lazy;
+using System.Runtime.Serialization;
 
 namespace SharePoint.Explorer.Modules.Nodes
 {
@@ -38,6 +39,8 @@ namespace SharePoint.Explorer.Modules.Nodes
         {
             return new ListNode();
         }
+
+        [IgnoreDataMember]
         public IObservableList Children
         {
             get
@@ -57,11 +60,13 @@ namespace SharePoint.Explorer.Modules.Nodes
             lists.Refresh();
         }
 
+        [IgnoreDataMember]
         public string Image
         {
             get { return "/_layouts/images/web.gif"; }
         }
 
+        [IgnoreDataMember]
         public string Description
         {
             get { return Url; }
@@ -78,6 +83,7 @@ namespace SharePoint.Explorer.Modules.Nodes
             return NavigateDisposition.Next;
         }
 
+        [IgnoreDataMember]
         public DeepLink DeepLink
         {
             get
@@ -94,6 +100,5 @@ namespace SharePoint.Explorer.Modules.Nodes
                 return deepLink;
             }
         }
-
     }
 }
