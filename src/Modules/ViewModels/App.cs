@@ -120,8 +120,7 @@ namespace SharePoint.Explorer.ViewModels
                 {
                     await webPart.UpdateSettings(json);
                 }))
-                await MessageBox.Show(string.Format("Configuration has been successfully saved. {0}",
-                        RootNodes.Configuration.DisplayCurrent.ToString()));
+                await MessageBox.Show(string.Format("Configuration has been successfully saved."));
         }
 
         internal void LoadConfiguration()
