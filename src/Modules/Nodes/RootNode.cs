@@ -44,7 +44,7 @@ namespace SharePoint.Explorer.Modules.Nodes
         {
             get
             {
-                return base.Title;
+                return ((ITreeNode)this).Title;
             }
 
             set
@@ -52,6 +52,7 @@ namespace SharePoint.Explorer.Modules.Nodes
                 base.Title = value;
             }
         }
+
 
         public new string Url
         {

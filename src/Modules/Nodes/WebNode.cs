@@ -72,6 +72,13 @@ namespace SharePoint.Explorer.Modules.Nodes
             get { return Url; }
         }
 
+        string ITreeNode.Title
+        {
+            get
+            {
+                return string.IsNullOrEmpty(Title) ? Url : Title;
+            }
+        }
         NavigateDisposition IExplorerNode.Navigate(DeepLink deepLink)
         {
             if((deepLink.WebUrl + '/').StartsWith(DeepLink.WebUrl + '/', StringComparison.InvariantCultureIgnoreCase))
