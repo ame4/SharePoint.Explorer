@@ -140,7 +140,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\James.SharePoint.dll</HintPath>
     </Reference>
-    <Reference Include="JScriptSuite, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7efe0325f6eb7fd2, processorArchitecture=MSIL">
+    <Reference Include="JScriptSuite, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8a2794a72fa6407c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Lib\JScriptSuite.dll</HintPath>
     </Reference>

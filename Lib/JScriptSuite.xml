@@ -33,7 +33,7 @@
       <param name="text">
       </param>
     </member>
-    <member name="M:JScriptSuite.Html5.IO.ByteArray.Set(JScriptSuite.Html5.IO.ByteArray,System.Int32)">
+    <member name="M:JScriptSuite.Html5.IO.TypedArray`2.Set(`0,System.Int32)">
       <summary>
             If the input array is a TypedArray, the two arrays may use the same underlying ArrayBuffer. 
             In this situation, setting the values takes place as if all the data is first copied into 
@@ -44,7 +44,7 @@
       <param name="source">A typed or untyped array of values to set.</param>
       <param name="targetIndex">The index in the current array at which the values are to be written.</param>
     </member>
-    <member name="M:JScriptSuite.Html5.IO.ByteArray.CopyTo(JScriptSuite.Html5.IO.ByteArray,System.Int32)">
+    <member name="M:JScriptSuite.Html5.IO.TypedArray`2.CopyTo(`0,System.Int32)">
       <summary>
             Copies all the elements of the current array to the specified <paramref name="target" /> starting 
             at the specified destination array <paramref name="targetIndex" />.
@@ -222,6 +222,9 @@
       <typeparam name="TDeserializer">Type of this class deserializes response</typeparam>
       <param name="senderFactory">Create <c>ISender</c> obgect to send request and recieve response</param>
       <returns>created <typeparamref name="TService" /> proxy<R>created <typeparamref name="TService" /> proxy<R /></R></returns>
+    </member>
+  </members>
+</doc>></R></returns>
     </member>
   </members>
 </doc>     Service proxy factory
