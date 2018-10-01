@@ -59,6 +59,7 @@ namespace SharePoint.Explorer.Modules.Lists.ViewModels
 
             set
             {
+                if (value != null) SelectedList = value.ParentFolder.ParentList;
                 folderItems.Value = value;
             }
         }

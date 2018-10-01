@@ -12,6 +12,7 @@ using JScriptSuite.Html5;
 using JScriptSuite.Html5.IO;
 using JScriptSuite.JScriptLib.UI.Controls.Lazy;
 using SharePoint.Explorer.Modules.Nodes;
+using System.Threading;
 
 namespace SharePoint.Explorer.Modules.Lists.UI
 {
@@ -29,28 +30,56 @@ namespace SharePoint.Explorer.Modules.Lists.UI
         new void DragOver(HtmlMouseEvent e)
         {
             base.DragOver(e);
-            if(e != null && itemsPane.Data?.FolderItems?.ParentFolder?.ParentList?.BaseType == BaseType.DocumentLibrary)
+            if(e != null)
             {
-                ListItem listItem = HitItem as ListItem;
-                ShowFeedback(listItem != null && listItem.FileSystemObjectType == FileSystemObjectType.Folder 
-                    ? FeedbackMode.Over : FeedbackMode.After);
+                List parentList = itemsPane.Data?.FolderItems?.ParentFolder?.ParentList;
+                if(parentList != null)
+                {
+                    if (parentList.BaseType == BaseType.DocumentLibrary)
+                    {
+                        ListItem listItem = HitItem as ListItem;
+                        ShowFeedback(listItem != null && listItem.FileSystemObjectType == FileSystemObjectType.Folder
+                            ? FeedbackMode.Over : FeedbackMode.After);
+                        return;
+                    }
+
+                    if (parentList.EnableAttachments)
+                    {
+                        ListItem listItem = HitItem as ListItem;
+                        ShowFeedback(listItem != null && listItem.FileSystemObjectType == FileSystemObjectType.File
+                            ? FeedbackMode.Over : FeedbackMode.None);
+                        return;
+                    }
+                }
             }
-            else
-            {
-                HideFeedback();
-            }
+
+            HideFeedback();
         }
 
         void Drop(HtmlDropEvent e)
         {
             base.Drop(e);
-            if (e != null && itemsPane.Data?.FolderItems?.ParentFolder?.ParentList?.BaseType == BaseType.DocumentLibrary)
+            if (e != null)
             {
-                ListItem listItem = HitItem as ListItem;
-                Folder folder = listItem != null && listItem.FileSystemObjectType == FileSystemObjectType.Folder
-                    ? listItem.Folder : itemsPane.Data.FolderItems.ParentFolder;
+                List parentList = itemsPane.Data?.FolderItems?.ParentFolder?.ParentList;
+                if(parentList != null)
+                {
+                    ListItem listItem = HitItem as ListItem;
+                    if(listItem != null)
+                    {
+                        if (parentList.BaseType == BaseType.DocumentLibrary)
+                        {
+                            Folder folder = listItem.FileSystemObjectType == FileSystemObjectType.Folder
+                                ? listItem.Folder : itemsPane.Data.FolderItems.ParentFolder;
 
-                Uploader.Upload(folder, e.Files);
+                            Uploader.Upload(folder, e.Files);
+                        }
+                        else if (parentList.EnableAttachments && listItem.FileSystemObjectType == FileSystemObjectType.File)
+                        {
+                            Uploader.Upload(listItem, e.Files);
+                        }
+                    }
+                }
             }
         }
 

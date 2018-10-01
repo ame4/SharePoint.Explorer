@@ -129,8 +129,15 @@ namespace SharePoint.Explorer.Modules.Lists.ViewModels
                         this.fields.Value = fields;
                     }
                 }
+                else if(ParentFolder.ParentList.EnableAttachments)
+                {
+                    Field[] fields = new Field[contentTypeDetail.Fields.Count + 1];
+                    fields[0] = listDetail.Fields.TryGetFieldById(BuiltInFields.Attachments.ID);
+                    contentTypeDetail.Fields.CopyTo(fields, 1);
+                    this.fields.Value = fields;
+                }
 
-                if(this.fields.Value == null)
+                if (this.fields.Value == null)
                 {
                     this.fields.Value = contentTypeDetail.Fields;
                 }

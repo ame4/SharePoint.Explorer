@@ -1,27 +1,27 @@
 ﻿<!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-xmlns:sys="http://jscriptsuite.com/templates/clr/System,mscorlib"
-xmlns:sp="http://jscriptsuite.com/templates/clr/James.SharePoint,James.SharePoint"
-xmlns:lazy="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Lazy,JScriptSuite.JScriptLib"
-xmlns:elc="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Lists.Components"
-xmlns:emlui="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Lists.UI"
-xmlns:emlviews="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Lists.Views"
-xmlns:ecu="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Components.UI"
-xmlns:emc="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Common"
-xmlns:dp="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.DataBinding.Providers,JScriptSuite.JScriptLib"
-xmlns:interops="http://jscriptsuite.com/templates/clr/JScriptSuite.InteropServices,JScriptSuite"
-xmlns:j="http://jscriptsuite.com/templates"
-xmlns:jc="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.Common,JScriptSuite.JScriptLib"
-xmlns:providers="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.DataBinding.Providers,JScriptSuite.JScriptLib"
-xmlns:gridlayout="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.GridLayout,JScriptSuite.JScriptLib"
-xmlns:trees="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Trees,JScriptSuite.JScriptLib"
-xmlns:buttons="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Buttons,JScriptSuite.JScriptLib"
-xmlns:windows="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Windows,JScriptSuite.JScriptLib"
-xmlns:gridLayout="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.GridLayout,JScriptSuite.JScriptLib"      
-xmlns:controls="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls,JScriptSuite.JScriptLib">
+    xmlns:sys="http://jscriptsuite.com/templates/clr/System,mscorlib"
+    xmlns:sp="http://jscriptsuite.com/templates/clr/James.SharePoint,James.SharePoint"
+    xmlns:lazy="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Lazy,JScriptSuite.JScriptLib"
+    xmlns:elc="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Lists.Components"
+    xmlns:emlui="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Lists.UI"
+    xmlns:emlviews="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Lists.Views"
+    xmlns:ecu="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Components.UI"
+    xmlns:emc="http://jscriptsuite.com/templates/clr/SharePoint.Explorer.Modules.Common"
+    xmlns:dp="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.DataBinding.Providers,JScriptSuite.JScriptLib"
+    xmlns:interops="http://jscriptsuite.com/templates/clr/JScriptSuite.InteropServices,JScriptSuite"
+    xmlns:j="http://jscriptsuite.com/templates"
+    xmlns:jc="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.Common,JScriptSuite.JScriptLib"
+    xmlns:providers="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.DataBinding.Providers,JScriptSuite.JScriptLib"
+    xmlns:gridlayout="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.GridLayout,JScriptSuite.JScriptLib"
+    xmlns:trees="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Trees,JScriptSuite.JScriptLib"
+    xmlns:buttons="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Buttons,JScriptSuite.JScriptLib"
+    xmlns:windows="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Windows,JScriptSuite.JScriptLib"
+    xmlns:gridLayout="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.GridLayout,JScriptSuite.JScriptLib"      
+    xmlns:styles="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Styles,JScriptSuite.JScriptLib"
+    xmlns:controls="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls,JScriptSuite.JScriptLib">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title></title>
 </head>
 <body j:type="emlui:SchemaXmlEditorWindow">
     <div j:control="gridLayout:GridLayoutPane() {
@@ -32,7 +32,7 @@ xmlns:controls="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI
           gridLayout:GridLayoutPane.RowBindings = [ gridLayout:UnitBinding(0, 1, false) { Style = j:target.target.Element.Style } ]
         }" style="width:100%; border-style:none"></textarea>
       <table cellpadding="0" cellspacing="0" style="width:100%"
-              j:control="controls:Control() { ClassName = windows:MessageBoxSkin.Instance.CommandBarClass }">
+              j:control="controls:Control() { ClassName = styles:MessageBoxStyles.CommandBar }">
           <tbody>
               <tr>
                   <td style="text-align:right; vertical-align:middle">

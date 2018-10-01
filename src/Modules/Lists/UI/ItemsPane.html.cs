@@ -29,6 +29,8 @@ using JScriptSuite.JScriptLib.UI.Controls.DataBinding;
 using JScriptSuite.JScriptLib.UI.Controls.Grids.ColumnHeaders;
 using JScriptSuite.Html5;
 using System.Threading;
+using JScriptSuite.JScriptLib.UI.Components.Selections;
+using JScriptSuite.JScriptLib.DataBinding.Providers.DependencyObjects;
 
 namespace SharePoint.Explorer.Modules.Lists.UI
 {
@@ -49,7 +51,7 @@ namespace SharePoint.Explorer.Modules.Lists.UI
             Overview.FilterColumns.AllowFilter = true;
 
             Overview.SortColumns.SortMode = GridSortMode.MultipleColumn;
-            Overview.RowsSelection.AllowMultipleRowSelection = true;
+            Overview.RowsSelection.SelectionMode = SelectionMode.Multiple;
 
             new GridClientSorter<ListItem, int>(Overview, Data.OverviewListView);
 
@@ -75,7 +77,16 @@ namespace SharePoint.Explorer.Modules.Lists.UI
                 Header = new SortableTextColumnHeader() { Text = "Value" },
                 Renderer = delegate(HtmlElement element, FieldValue data, object state)
                 {
-                    return data.Column.Renderer(element, data.ListItem, state);
+                    HtmlElement child = (HtmlElement)element.FirstChild;
+                    if(child == null)
+                    {
+                        element.InnerHtml = "<div style='height:100%;overflow:hidden'><div style='height:100%;overflow:hidden'></div></div>";
+                        child = (HtmlElement)element.FirstChild;
+                    }
+
+                    child.ClassName = data.Column.ClassName;
+                    child = (HtmlElement)child.FirstChild;
+                    return data.Column.Renderer(child, data.ListItem, state);
                 }
             });
 
@@ -238,7 +249,6 @@ namespace SharePoint.Explorer.Modules.Lists.UI
                     if (value != null)
                     {
                         overviewFilterer = new GridClientFilterer<ListItem>(Overview, Data.OverviewListView);
-
                         foreach (Field field in value)
                         {
                             GridColumn column = UIUtility.CreateGridColumn(field);

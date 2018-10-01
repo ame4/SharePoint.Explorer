@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace SharePoint.Explorer.Modules.Nodes
 {
@@ -50,9 +51,9 @@ namespace SharePoint.Explorer.Modules.Nodes
                 File file = files[0];
                 ListItem listItem = null;
                 if (await LazyWindow.ShowWaiting(string.Format("{0}: uploading...", file.Name),
-                    async delegate()
+                    async delegate(CancellationToken cancellationToken)
                     {
-                        listItem = await folder.Upload(file);
+                        listItem = await folder.Upload(file, cancellationToken);
                     }))
                 {
                     ListItemEditor.Show(new EditAction() { EditMode = EditMode.Edit,
@@ -65,12 +66,25 @@ namespace SharePoint.Explorer.Modules.Nodes
                 for (int i = 0; i < files.Length; i++)
                 {
                     if (!await LazyWindow.ShowWaiting(string.Format("{0}: uploading...", files[i].Name),
-                        delegate ()
+                        delegate (CancellationToken cancellation)
                         {
-                            return folder.Upload(files[i]);
+                            return folder.Upload(files[i], cancellation);
                         }))
                         break;
                 }
+            }
+        }
+
+        internal static async void Upload(ListItem listItem, HtmlCollection<File> files)
+        {
+            for (int i = 0; i < files.Length; i++)
+            {
+                if (!await LazyWindow.ShowWaiting(string.Format("{0}: uploading...", files[i].Name),
+                    delegate (CancellationToken cancellationToken)
+                    {
+                        return listItem.AddAttachment(UriUtility.GetFileName(files[i].Name), files[i], cancellationToken);
+                    }))
+                    break;
             }
         }
     }

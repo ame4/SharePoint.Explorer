@@ -22,6 +22,7 @@
   xmlns:windows="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Windows,JScriptSuite.JScriptLib"
   xmlns:gridLayout="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.GridLayout,JScriptSuite.JScriptLib"      
   xmlns:tabs="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Tabs,JScriptSuite.JScriptLib"      
+  xmlns:styles="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Styles,JScriptSuite.JScriptLib"
   xmlns:controls="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls,JScriptSuite.JScriptLib">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -51,7 +52,6 @@
                 </tr>
             </tbody>
         </table>
-      
         <div j:control="lazy:LazyPane()
               {
                 Element.Style.Visibility := jc:Operations.IsVisible(jc:Operations.IsNotNull(j:control.Data.FolderItems.ContentType)),
@@ -70,7 +70,7 @@
                         Rows = [ { Value = 40, Absolute = true }, { Value = 1 } ],
                         Element.Style.Visibility := jc:Operations.IsVisible(jc:Operations.IsNotNull(j:control.Data.SelectedItem))
                     }">
-                  <table cellspacing="0" cellpadding="0" style="width: 100%" j:control="controls:Control() { ClassName = windows:MessageBoxSkin.Instance.CommandBarClass }">
+                  <table cellspacing="0" cellpadding="0" style="width: 100%" j:control="controls:Control() { ClassName = styles:MessageBoxStyles.CommandBar }">
                         <tbody>
                             <tr>
                                 <td style="padding:4px; border-bottom:solid 1px white">

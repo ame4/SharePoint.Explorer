@@ -15,7 +15,8 @@
   xmlns:buttons="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Buttons,JScriptSuite.JScriptLib"
   xmlns:groupBoxes="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.GroupBoxes,JScriptSuite.JScriptLib"
   xmlns:controls="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls,JScriptSuite.JScriptLib"
-  xmlns:windows="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Windows,JScriptSuite.JScriptLib"    
+  xmlns:windows="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Windows,JScriptSuite.JScriptLib"
+  xmlns:styles="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Styles,JScriptSuite.JScriptLib"    
   xmlns:tabs="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI.Controls.Tabs,JScriptSuite.JScriptLib">
 <head>
     <meta charset="utf-8" />
@@ -33,7 +34,7 @@
         <td><input type="checkbox" j:control="buttons:CheckBox() { Checked = j:control.Data.IsSite }" /></td>
       </tr>
       <tr>
-        <td colspan="2" style="text-align:right"  j:control="controls:Control() { ClassName = windows:MessageBoxSkin.Instance.CommandBarClass }">
+        <td colspan="2" style="text-align:right"  j:control="controls:Control() { ClassName = styles:MessageBoxStyles.CommandBar }">
             <span tabindex="1" j:control="buttons:ImageTextButton() 
                 { 
                     Execute = j:control.OK,
