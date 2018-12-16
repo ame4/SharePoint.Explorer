@@ -12,53 +12,63 @@ using JScriptSuite.JScriptLib.DataBinding.Providers;
 using JScriptSuite.Xml;
 using JScriptSuite.JScriptLib.DataBinding.Providers.Lazy;
 using JScriptSuite.JScriptLib.Common;
-
+using JScriptSuite.JScriptLib.DataBinding.Providers.DependencyObjects;
 
 namespace SharePoint.Explorer.Modules.Lists.ViewModels
 {
-    class FolderItems : Observable, IDisposable
+    class FolderItems : DependencyObject, IDisposable
     {
         internal readonly FolderNode ParentFolder;
-        readonly ObservableProperty<ContentType> contentType;
         ContentTypeDetail contentTypeDetail;
         LazyObservable<FolderListItemCollection> items;
-        readonly ObservableProperty<IEnumerable<Field>> fields;
         ListDetail listDetail;
 
         internal FolderItems(FolderNode parentFolder)
         {
             ParentFolder = parentFolder;
-            contentType = new ObservableProperty<ContentType>(this);
-            fields = new ObservableProperty<IEnumerable<Field>>(this);
         }
 
+        readonly DependencyProperty<IEnumerable<Field>> fields = DependencyProperty<IEnumerable<Field>>.Register(typeof(FolderItems));
         internal IEnumerable<Field> Fields
         {
             get
             {
-                return fields.Value;
+                return GetValue(fields);
+            }
+
+            private set
+            {
+                SetValue(fields, value);
             }
         }
 
+        readonly static DependencyProperty<ContentType> contentType = DependencyProperty<ContentType>.Register(typeof(FolderItems));
         internal ContentType ContentType
         {
             get
             {
-                return contentType.Value;
+                return GetValue(contentType);
             }
 
             set
             {
-                contentType.Value = value;
-                ParentFolder.DeepLink.ContentTypeId = value != null ? value.ID : null;
+                SetValue(contentType, value);
+                
             }
+        }
+
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+            if(e.Property == contentType)
+                ParentFolder.DeepLink.ContentTypeId = ContentType?.ID;
         }
 
         internal bool CanRefresh
         {
             get
             {
-                return contentTypeDetail != null && contentTypeDetail.ContentType == contentType.Value;
+                return contentTypeDetail != null && contentTypeDetail.ContentType == ContentType;
             }
         }
 
@@ -96,14 +106,14 @@ namespace SharePoint.Explorer.Modules.Lists.ViewModels
         {
             if (contentTypeDetail == null || listDetail == null)
             {
-                fields.Value = null;
+                Fields = null;
                 DisposeItems();
                 return null;
             }
 
             if (this.contentTypeDetail != contentTypeDetail || this.listDetail != listDetail)
             {
-                fields.Value = null;
+                Fields = null;
                 DisposeItems();
                 this.contentTypeDetail = contentTypeDetail;
                 this.listDetail = listDetail;
@@ -126,7 +136,7 @@ namespace SharePoint.Explorer.Modules.Lists.ViewModels
                         contentTypeDetail.Fields.CopyTo(fields, 0);
                         count = contentTypeDetail.Fields.Count;
                         if (fileSizeDisplay != null) fields[count++] = fileSizeDisplay;
-                        this.fields.Value = fields;
+                        Fields = fields;
                     }
                 }
                 else if(ParentFolder.ParentList.EnableAttachments)
@@ -134,12 +144,12 @@ namespace SharePoint.Explorer.Modules.Lists.ViewModels
                     Field[] fields = new Field[contentTypeDetail.Fields.Count + 1];
                     fields[0] = listDetail.Fields.TryGetFieldById(BuiltInFields.Attachments.ID);
                     contentTypeDetail.Fields.CopyTo(fields, 1);
-                    this.fields.Value = fields;
+                    Fields = fields;
                 }
 
-                if (this.fields.Value == null)
+                if (Fields == null)
                 {
-                    this.fields.Value = contentTypeDetail.Fields;
+                    Fields = contentTypeDetail.Fields;
                 }
 
                 Refresh();

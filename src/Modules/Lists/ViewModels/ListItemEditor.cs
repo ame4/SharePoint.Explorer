@@ -22,17 +22,17 @@ using JScriptSuite.JScriptLib.Html;
 using SharePoint.Explorer.Modules.Lists.UI;
 using System.Threading.Tasks;
 using System.Threading;
+using JScriptSuite.JScriptLib.DataBinding.Providers.DependencyObjects;
 
 namespace SharePoint.Explorer.Modules.Lists.ViewModels
 {
-    class ListItemEditor : Observable, ISavable
+    class ListItemEditor : DependencyObject, ISavable
     {
         readonly static HtmlLazy<ListItemEditorWindow> window = new DefaultHtmlLazy<ListItemEditorWindow>();
 
         readonly EditAction editAction;
 
         internal readonly ListItem ListItem;
-        internal readonly ObservableProperty<ContentType> contentType;
         internal readonly ObservableList<ListContentType> ContentTypes;
 
         internal readonly string Title;
@@ -42,8 +42,7 @@ namespace SharePoint.Explorer.Modules.Lists.ViewModels
         {
             this.editAction = editAction;
             ContentTypes = contentTypes;
-
-            this.contentType = new ObservableProperty<ContentType>(this) { Value = contentType };
+            ContentType = contentType;
 
 
             switch (editAction.EditMode)
@@ -155,24 +154,24 @@ namespace SharePoint.Explorer.Modules.Lists.ViewModels
         }
 
 
+        readonly static DependencyProperty<ContentType> contentType = DependencyProperty<ContentType>.Register(typeof(ListItemEditor));
         internal ContentType ContentType
         {
             get
             {
-                return contentType.Value;
+                return GetValue(contentType);
             }
 
             set
             {
-                if (contentType.Value != value)
-                {
-                    contentType.Value = value;
-                    if (ListItem != null)
-                    {
-                        ListItem.ContentTypeId = value != null ? value.ID : null;
-                    }
-                }
+                SetValue(contentType, value);
             }
+        }
+
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+            if(e.Property == contentType && ListItem != null) ListItem.ContentTypeId = ContentType?.ID;
         }
 
         public Task Save(CancellationToken cancellationToken)

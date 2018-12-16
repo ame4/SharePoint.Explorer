@@ -1,6 +1,7 @@
 ﻿using James.SharePoint;
 using JScriptSuite.InteropServices;
 using JScriptSuite.JScriptLib.DataBinding.Providers;
+using JScriptSuite.JScriptLib.DataBinding.Providers.DependencyObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +12,10 @@ namespace SharePoint.Explorer.Modules.Lists.ViewModels
     class ContentTypesViewModel : ActivableListViewModel
     {
         internal readonly ListView<ListContentType, string, object[]> OverviewListView;
-        readonly ObservableProperty<ListContentType> selectedItem;
         internal readonly FieldsEditor FieldsEditor;
 
         internal ContentTypesViewModel()
         {
-            selectedItem = new ObservableProperty<ListContentType>(this);
             OverviewListView = new ListView<ListContentType, string, object[]>(JMapFactories.String,
                 delegate(ListContentType contentType) { return contentType.ID; },
                 null,
@@ -34,14 +33,15 @@ namespace SharePoint.Explorer.Modules.Lists.ViewModels
             }
         }
 
+        readonly static DependencyProperty<ListContentType> selectedItem = DependencyProperty<ListContentType>.Register(typeof(ContentTypesViewModel));
         internal ListContentType SelectedItem
         {
             get { 
-                return selectedItem.Value; 
+                return GetValue(selectedItem); 
             }
             
             set { 
-                selectedItem.Value = value; 
+                SetValue(selectedItem, value); 
             }
         }
     }

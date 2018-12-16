@@ -13,31 +13,31 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using JScriptSuite.JScriptLib.DataBinding.Providers.DependencyObjects;
 
 namespace SharePoint.Explorer.Modules.Lists.ViewModels
 {
-    abstract class SchemaXmlEditor : Observable, ISavable
+    abstract class SchemaXmlEditor : DependencyObject, ISavable
     {
         readonly static HtmlLazy<SchemaXmlEditorWindow> instance = new DefaultHtmlLazy<SchemaXmlEditorWindow>();
 
         internal readonly string Title;
 
-        readonly ObservableProperty<string> schemaXml;
         
         string original;
 
         internal SchemaXmlEditor(string schemaXml, string title)
         {
             this.original = schemaXml;
-            this.schemaXml = new ObservableProperty<string>(this);
             Title = title;
             SchemaXml = schemaXml;
         }
 
+        readonly static DependencyProperty<string> schemaXml = DependencyProperty<string>.Register(typeof(SchemaXmlEditor));
         internal string SchemaXml
         {
-            get { return schemaXml.Value; }
-            set { schemaXml.Value = value; }
+            get { return GetValue(schemaXml); }
+            set { SetValue(schemaXml, value); }
         }
 
         protected virtual Task Save(CancellationToken cancellationToken)

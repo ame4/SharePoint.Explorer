@@ -24,7 +24,7 @@
         Header = tabs:ImageTextTabHeaderItem() { Text = 'General' },
         Page = ui:ListGeneralPane() {
           Data = {
-            SelectedList = j:control.Data,
+            SelectedList := j:control.Data,
             IsActive = sys:Object.Equals(j:variable.selectedTabItem, j:target.target.target)
           },
           Element.Style.Overflow = html:StyleOverflow.Auto
@@ -32,16 +32,18 @@
       <j:item source="tabs:TabItem() { 
         Header = tabs:ImageTextTabHeaderItem() { Text = 'Views' },
         Page = ui:ViewsPane() {
+          Lazy = j:control.Data.Views,
           Data = {
-            SelectedList = j:control.Data,
+            SelectedList := j:control.Data,
             IsActive = sys:Object.Equals(j:variable.selectedTabItem, j:target.target.target)
           }
         }}"/>
       <j:item source="tabs:TabItem() { 
         Header = tabs:ImageTextTabHeaderItem() { Text = 'Content Types' },
         Page = ui:ContentTypesPane() {
+          Lazy = j:control.Data.ContentTypes,
           Data = {
-            SelectedList = j:control.Data,
+            SelectedList := j:control.Data,
             IsActive = sys:Object.Equals(j:variable.selectedTabItem, j:target.target.target)
           }
         }}"/>

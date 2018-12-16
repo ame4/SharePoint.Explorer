@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using JScriptSuite.JScriptLib.DataBinding.Providers.DependencyObjects;
 
 namespace SharePoint.Explorer.Modules.Lists.ViewModels
 {
@@ -18,15 +19,11 @@ namespace SharePoint.Explorer.Modules.Lists.ViewModels
         internal readonly ListView<FieldValue, Guid, object[]> DetailListView;
         internal readonly ListView<PermissionValue, string, object[]> PermissionsListView;
 
-        readonly ObservableProperty<FolderItems> folderItems;
-        readonly ObservableProperty<ListItem> selectedItem;
 
         IDisposable adviseOverview;
 
         internal ItemsView()
         {
-            folderItems = new ObservableProperty<FolderItems>(this);
-            selectedItem = new ObservableProperty<ListItem>(this);
             OverviewListView = new ListView<ListItem, int, object[]>(JMapFactories.Int,
                 delegate(ListItem listItem)
                 {
@@ -50,30 +47,42 @@ namespace SharePoint.Explorer.Modules.Lists.ViewModels
 
         }
 
+        readonly static DependencyProperty<FolderItems> folderItems = DependencyProperty<FolderItems>.Register(typeof(ItemsView));
         internal FolderItems FolderItems
         {
             get
             {
-                return folderItems.Value;
+                return GetValue(folderItems);
             }
 
             set
             {
-                if (value != null) SelectedList = value.ParentFolder.ParentList;
-                folderItems.Value = value;
+                SetValue(folderItems, value);
             }
         }
+
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            if(e.Property == folderItems && e.NewValue != null)
+            {
+                SelectedList = FolderItems.ParentFolder.ParentList;
+            }
+
+            base.OnPropertyChanged(e);
+        }
+
+        readonly static DependencyProperty<ListItem> selectedItem = DependencyProperty<ListItem>.Register(typeof(ItemsView));
 
         internal ListItem SelectedItem
         {
             get
             {
-                return selectedItem.Value;
+                return GetValue(selectedItem);
             }
 
             set
             {
-                selectedItem.Value = value;
+                SetValue(selectedItem, value);
             }
         }
 

@@ -10,30 +10,29 @@ using JScriptSuite.JScriptLib.DataBinding;
 using JScriptSuite.JScriptLib.DataBinding.Providers;
 using JScriptSuite.JScriptLib.UI.Controls.Menus;
 using JScriptSuite.JScriptLib.UI.Controls.Trees;
+using JScriptSuite.JScriptLib.DataBinding.Providers.DependencyObjects;
 
 namespace SharePoint.Explorer.Modules.Nodes
 {
     class ListNode : sp.List, IExplorerNode
     {
-        readonly ObservableProperty<ContentType> selectedContentType;
-
         public ListNode()
         {
-            selectedContentType = new ObservableProperty<ContentType>(this);
             RootFolder.Advise(Notify);
         }
 
 
+        readonly static DependencyProperty<ContentType> selectedContentType = DependencyProperty<ContentType>.Register(typeof(ListNode));
         internal ContentType SelectedContentType
         {
             get
             {
-                return selectedContentType.Value;
+                return GetValue(selectedContentType);
             }
 
             set
             {
-                selectedContentType.Value = value;
+                SetValue(selectedContentType, value);
             }
         }
 

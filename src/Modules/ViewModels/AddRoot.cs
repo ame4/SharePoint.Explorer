@@ -13,26 +13,35 @@ using James.SharePoint;
 using JScriptSuite.JScriptLib.UI.Controls.DataWindows;
 using System.Threading;
 using System.Threading.Tasks;
+using JScriptSuite.JScriptLib.DataBinding.Providers.DependencyObjects;
 
 namespace SharePoint.Explorer.ViewModels
 {
-    class AddRoot : Observable, ISavable
+    class AddRoot : DependencyObject, ISavable
     {
         AddRootWindow window;
-
         readonly App app;
-        readonly ObservableProperty<string> url;
-        readonly ObservableProperty<bool> isSite;
 
         internal AddRoot(App app)
         {
             this.app = app;
-            url = new ObservableProperty<string>(this);
-            isSite = new ObservableProperty<bool>(this);
         }
 
-        internal string Url { get { return url.Value; } set { url.Value = value; } }
-        internal bool IsSite { get { return isSite.Value; } set { isSite.Value = value; } }
+        readonly static DependencyProperty<string> url = DependencyProperty<string>.Register(typeof(AddRoot));
+        internal string Url {
+            get {
+                return GetValue(url);
+            }
+            set {
+                SetValue(url, value);
+            }
+        }
+
+        readonly static DependencyProperty<bool> isSite = DependencyProperty<bool>.Register(typeof(AddRoot));
+        internal bool IsSite {
+            get { return GetValue(isSite); }
+            set { SetValue(isSite, value); }
+        }
 
         internal void Show()
         {

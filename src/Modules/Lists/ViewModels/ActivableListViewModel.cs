@@ -5,28 +5,24 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using JScriptSuite.JScriptLib.DataBinding.Providers.DependencyObjects;
 
 namespace SharePoint.Explorer.Modules.Lists.ViewModels
 {
     class ActivableListViewModel : Activable
     {
-        readonly ObservableProperty<ListNode> selectedList;
 
-        internal ActivableListViewModel()
-        {
-            selectedList = new ObservableProperty<ListNode>(this);
-        }
-
+        readonly static DependencyProperty<ListNode> selectedList = DependencyProperty<ListNode>.Register(typeof(ActivableListViewModel));
         internal virtual ListNode SelectedList
         {
             get
             {
-                return selectedList.Value;
+                return GetValue(selectedList);
             }
 
             set
             {
-                selectedList.Value = value;
+                SetValue(selectedList, value);
             }
         }
     }

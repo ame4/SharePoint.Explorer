@@ -22,13 +22,13 @@ using JScriptSuite.JScriptLib.Html;
 using SharePoint.Explorer.Modules.Nodes;
 using JScriptSuite.InteropServices;
 using System.Threading;
+using JScriptSuite.JScriptLib.DataBinding.Providers.DependencyObjects;
 
 namespace SharePoint.Explorer.ViewModels
 {
-    public class App : Observable
+    public class App : DependencyObject
     {
         readonly WebPart webPart;
-        readonly ObservableProperty<RootNodes> rootNodes;
         readonly AddRoot addRoot;
         DeepLinkViewModel deepLink;
         MainPane mainPane;
@@ -38,7 +38,6 @@ namespace SharePoint.Explorer.ViewModels
         App()
         {
             webPart = new WebPart();
-            rootNodes = new ObservableProperty<RootNodes>(this);
             addRoot = new AddRoot(this);
             HtmlWindow.Current.AdviseLoad(Load);
         }
@@ -99,16 +98,17 @@ namespace SharePoint.Explorer.ViewModels
 
         }
 
+        readonly static DependencyProperty<RootNodes> rootNodes = DependencyProperty<RootNodes>.Register(typeof(App));
         internal RootNodes RootNodes
         {
             get
             {
-                return rootNodes.Value;
+                return GetValue(rootNodes);
             }
 
             private set
             {
-                rootNodes.Value = value;
+                SetValue(rootNodes, value);
             }
         }
 

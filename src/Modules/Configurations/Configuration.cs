@@ -1,5 +1,6 @@
 ﻿using James.SharePoint.WebParts;
 using JScriptSuite.JScriptLib.DataBinding.Providers;
+using JScriptSuite.JScriptLib.DataBinding.Providers.DependencyObjects;
 using JScriptSuite.Remoting;
 using System;
 using System.Collections.Generic;
@@ -8,29 +9,23 @@ using System.Text;
 
 namespace SharePoint.Explorer.Modules.Configurations
 {
-    public class Configuration<TRootNode> : Observable
+    public class Configuration<TRootNode> : DependencyObject
     {
-        readonly ObservableProperty<DisplayCurrentMode?> displayCurrentMode;
-
-        public Configuration()
-        {
-            displayCurrentMode = new ObservableProperty<DisplayCurrentMode?>(this);
-        }
-
         public ScreenConfiguration Screen;
 
         public RootsObservableList<TRootNode> Roots;
 
+        readonly static DependencyProperty<DisplayCurrentMode?> displayCurrent = DependencyProperty<DisplayCurrentMode?>.Register(typeof(Configuration<TRootNode>));
         public DisplayCurrentMode? DisplayCurrent
         {
             get
             {
-                return displayCurrentMode.Value;
+                return GetValue(displayCurrent);
             }
 
             set
             {
-                displayCurrentMode.Value = value;
+                SetValue(displayCurrent, value);
             }
         }
 
