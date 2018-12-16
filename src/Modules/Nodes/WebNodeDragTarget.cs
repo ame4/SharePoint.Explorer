@@ -24,8 +24,7 @@ namespace SharePoint.Explorer.Modules.Nodes
         {
             this.treeView = treeView;
             this.webNode = webNode;
-            RootNode rootNode = webNode as RootNode;
-            canMove = rootNode != null && !rootNode.IsCurrent;
+            canMove = webNode.RootNode != null && !webNode.RootNode.IsCurrent;
         }
 
 
@@ -37,7 +36,7 @@ namespace SharePoint.Explorer.Modules.Nodes
             {
                 RootNode target = hit.Nodes.List[hit.Index] as RootNode;
                 if (target == null) return DropEffects.None;
-                if (target == webNode) return DropEffects.Copy;
+                if (target == webNode.RootNode) return DropEffects.Copy;
                 if (2 * (clientY - hit.Rect.Top) < hit.Rect.Height)
                 {
                     if (hit.Index > 0 && hit.Nodes.List[hit.Index - 1] == webNode) return DropEffects.Copy;
@@ -54,7 +53,7 @@ namespace SharePoint.Explorer.Modules.Nodes
         void IDropTarget.Drop(HtmlMouseEvent e, DropEffects dropEffect)
         {
             RootNodes rootNodes = (RootNodes)treeView.NodeSource;
-            RootNode rootNode = webNode as RootNode;
+            RootNode rootNode = webNode.RootNode;
             long index = hit != null ? hit.Index : -1;
             if (index >= 0 && 2 * (clientY - hit.Rect.Top) >= hit.Rect.Height)
             {

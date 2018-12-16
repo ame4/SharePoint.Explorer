@@ -136,20 +136,26 @@
     <EmbeddedResource Include="Modules\Webs\UI\WebPane.html" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="James.SharePoint, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8a2794a72fa6407c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\James.SharePoint.dll</HintPath>
-    </Reference>
-    <Reference Include="JScriptSuite, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8a2794a72fa6407c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\JScriptSuite.dll</HintPath>
-    </Reference>
-    <Reference Include="JScriptSuite.JScriptLib, Version=1.0.0.0, Culture=neutral, PublicKeyToken=8a2794a72fa6407c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Lib\JScriptSuite.JScriptLib.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Runtime.Serialization" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\JScriptSuite\James.SharePoint\James.SharePoint.csproj">
+      <Project>{9a5e1027-fcbb-4269-b50b-2b6363741329}</Project>
+      <Name>James.SharePoint</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\JScriptSuite\JScriptSuite.BrowserHost\JScriptSuite.BrowserHost.csproj">
+      <Project>{17133e49-99b8-4b2f-b90a-4b03199c2631}</Project>
+      <Name>JScriptSuite.BrowserHost</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\JScriptSuite\JScriptSuite.JScriptLib\JScriptSuite.JScriptLib.csproj">
+      <Project>{5d8dcef6-c15f-49da-98c0-2a69c472ed09}</Project>
+      <Name>JScriptSuite.JScriptLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\JScriptSuite\JScriptSuite\JScriptSuite.csproj">
+      <Project>{1b215199-41db-435d-bb9d-6354fd4dae4b}</Project>
+      <Name>JScriptSuite</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

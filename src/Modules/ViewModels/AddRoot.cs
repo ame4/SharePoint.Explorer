@@ -69,18 +69,18 @@ namespace SharePoint.Explorer.ViewModels
         {
             Url.NotEmpty("Please enter url first!");
             LazyWindow.ShowWaiting();
-            RootNode web = new RootNode() { Url = Url, IsSite = IsSite };
-
+            RootNode rootNode = new RootNode() { Url = Url, IsSite = IsSite };
+            app.ApplyRootUrl(rootNode);
             if (IsSite)
             {
-                await web.Webs.Get(cancellationToken);
+                await rootNode.WebNode.Webs.Get(cancellationToken);
             }
             else
             {
-                await web.Detail.Get(cancellationToken);
+                await rootNode.WebNode.Detail.Get(cancellationToken);
             }
 
-            Add(web);
+            Add(rootNode);
         }
 
         void ISavable.Close()

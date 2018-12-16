@@ -14,15 +14,18 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using JScriptSuite.JScriptLib.UI.Controls.Trees;
 
 namespace SharePoint.Explorer.Modules.Nodes
 {
-    public class RootNode : WebNode
+    public class RootNode : DependencyObject, IExplorerNode
     {
         internal RootNodes RootNodes;
+        internal readonly WebNode WebNode;
 
         public RootNode()
         {
+            WebNode = new WebNode(this);
         }
 
         readonly static DependencyProperty<bool> isSite = DependencyProperty<bool>.Register(typeof(RootNode));
@@ -40,25 +43,24 @@ namespace SharePoint.Explorer.Modules.Nodes
             }
         }
 
-        public new string Title
+        public string Title
         {
             get
             {
-                return ((ITreeNode)this).Title;
+                return ((ITreeNode)WebNode).Title;
             }
 
             set
             {
-                base.Title = value;
+                WebNode.Title = value;
             }
         }
 
-
-        public new string Url
+        string url;
+        public string Url
         {
             get
             {
-                string url = base.Url;
                 string server = UriUtility.GetServer(url);
                 if(server != null)
                 {
@@ -69,7 +71,7 @@ namespace SharePoint.Explorer.Modules.Nodes
                     }
                 }
 
-                return base.Url;
+                return url;
             }
 
             set
@@ -79,8 +81,13 @@ namespace SharePoint.Explorer.Modules.Nodes
                     value = UriUtility.GetServer(HtmlWindow.Current.Location.Href) + value;
                 }
 
-                base.Url = value;
+                url = value;
             }
+        }
+
+        internal void ApplyRootUrl(params string[] parameters)
+        {
+            WebNode.Url = string.Format(url, parameters);
         }
 
         internal bool IsCurrent
@@ -91,18 +98,27 @@ namespace SharePoint.Explorer.Modules.Nodes
             }
         }
 
-        public override ContextMenu ContextMenu(IHierarchyLevel level, long index)
+        DeepLink IExplorerNode.DeepLink => WebNode.DeepLink;
+
+        string ITreeNode.Image => WebNode.Image;
+
+        string ITreeNode.Description => WebNode.Description;
+
+        IObservableList IHierarchyItem.Children => WebNode.Children;
+
+        public ContextMenu ContextMenu(IHierarchyLevel level, long index)
         {
-            return NodeUtil.RootContextMenu(delegate()
-            {
-                RootNodes.RemoveRootNode(index);
-            },
-            Refresh);
+            return NodeUtil.RootContextMenu(
+                delegate()
+                {
+                    RootNodes.RemoveRootNode(index);
+                },
+                WebNode.Refresh);
         }
 
-        protected override IDisposable LoadSubsites()
+        public NavigateDisposition Navigate(DeepLink deepLink)
         {
-            return IsSite ? LoadSiteCollection() : base.LoadSubsites();
+            return ((IExplorerNode)WebNode).Navigate(deepLink);
         }
     }
 }

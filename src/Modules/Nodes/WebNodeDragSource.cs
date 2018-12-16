@@ -19,8 +19,7 @@ namespace SharePoint.Explorer.Modules.Nodes
         DropEffects IDragSource.DropEffects
         {
             get {
-                RootNode rootNode = web as RootNode;
-                return rootNode != null && !rootNode.IsCurrent ? DropEffects.Copy | DropEffects.Move : DropEffects.Copy;
+                return web.RootNode != null && !web.RootNode.IsCurrent ? DropEffects.Copy | DropEffects.Move : DropEffects.Copy;
             }
         }
 

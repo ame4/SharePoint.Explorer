@@ -16,6 +16,7 @@ using JScriptSuite.JScriptLib.Html;
 using JScriptSuite.JScriptLib.DataBinding.Providers.Lazy;
 using System.Threading.Tasks;
 using System.Threading;
+using SharePoint.Explorer.ViewModels;
 
 namespace SharePoint.Explorer.Modules.Nodes
 {
@@ -23,18 +24,20 @@ namespace SharePoint.Explorer.Modules.Nodes
     {
         readonly ReferenceObservableList currenSite;
         readonly ReferenceObservableList roots;
-        readonly LazyObservable<Web> lazyCurrenSite;
+        readonly LazyObservable<RootNode> lazyCurrenSite;
+        readonly App app;
         LazyLoadingList loadingCurrenSite;
         readonly ReferenceObservable<Configuration<RootNode>> configuration;
         bool currentSiteLoadingAsSite;
 
-        internal RootNodes()
+        internal RootNodes(App app)
         {
+            this.app = app;
             configuration = new ReferenceObservable<Configuration<RootNode>>();
             configuration.Advise(ConfigurationChange);
             roots = new ReferenceObservableList();
             currenSite = new ReferenceObservableList();
-            lazyCurrenSite = new LazyObservable<Web>(LoadCurrentSite);
+            lazyCurrenSite = new LazyObservable<RootNode>(LoadCurrentSite);
             loadingCurrenSite = new LazyLoadingList(LoadCurrentSiteList);
             List = new ObservableUnionList()
             {
@@ -71,29 +74,21 @@ namespace SharePoint.Explorer.Modules.Nodes
             return lazyCurrenSite.State == LazyState.Loaded && lazyCurrenSite.Value == rootNode;
         }
 
-        async Task<Web> LoadCurrentSite(CancellationToken cancellationToken)
+        async Task<RootNode> LoadCurrentSite(CancellationToken cancellationToken)
         {
+            Web web = await Web.CurrentWeb.Get(cancellationToken);
+            WebDetail detail = await web.Detail.Get(cancellationToken);
+
             RootNode rootNode = new RootNode()
             {
-                Url = UriUtility.GetAbsolutePath(HtmlWindow.Current.Location.Href),
+                Url = detail.Web.Url,
                 IsSite = Configuration.EffectiveDisplayCurrent == DisplayCurrentMode.Site,
+                Title = detail.Web.Url,
                 RootNodes = this
             };
 
+            app.ApplyRootUrl(rootNode);
             currentSiteLoadingAsSite = rootNode.IsSite;
-
-            if (rootNode.IsSite)
-            {
-                await rootNode.Webs.Get(cancellationToken);
-            }
-            else
-            {
-                Web web = await Web.CurrentWeb.Get(cancellationToken);
-                WebDetail detail = await web.Detail.Get(cancellationToken);
-                rootNode.Url = detail.Web.Url;
-                rootNode.Title = detail.Web.Title;
-            }
-
             return rootNode;
         }
 
@@ -114,9 +109,9 @@ namespace SharePoint.Explorer.Modules.Nodes
         IDisposable LoadCurrentSiteList()
         {
             return lazyCurrenSite.Get(
-                delegate (Web root)
+                delegate (RootNode root)
                 {
-                    currenSite.List = root != null ? new ObservableList<Web>() { root } : null;
+                    currenSite.List = root != null ? new ObservableList<Web>() { root.WebNode } : null;
                 },
                 loadingCurrenSite.SetException);
         }

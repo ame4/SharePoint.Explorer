@@ -47,50 +47,45 @@
             }">
         </div>
         <div style="overflow:hidden;position:relative">
-          <div style='overflow:auto;height:100%;width:100%' j:control="j:control.InfoTabStrip {
-                Element.Style.Display = jc:Operations.IsDisplayed(
-                    jc:Operations.Not(
-                        jc:Operations.Or(
-                            jc:Operations.CanCast&lt;emn:WebNode&gt;(j:variable.selectedNodeData),
-                            jc:Operations.CanCast&lt;emn:ListNode&gt;(j:variable.selectedNodeData),
-                            jc:Operations.CanCast&lt;emn:FolderNode&gt;(j:variable.selectedNodeData)
-                        )
-                    )
-                )
-              }">
-            <j:collection target="TabItems">
-              <j:item source="tabs:TabItem() { 
-                Header = tabs:ImageTextTabHeaderItem() { 
-                  Text = 'Information',
-                  Image = '/_layouts/images/info16by16.gif'
+            <div style='overflow:auto;height:100%;width:100%' j:control="webs:WebPane() { 
+                Element.Style.Display = jc:Operations.IsDisplayed(jc:Operations.CanCast&lt;emn:RootNode&gt;(j:variable.selectedNodeData)),
+                Data = jc:Operations.TryCast&lt;emn:RootNode&gt;(j:variable.selectedNodeData).WebNode
+            }">
+            </div>
+            <div style='overflow:auto;height:100%;width:100%' j:control="webs:WebPane() { 
+                Element.Style.Display = jc:Operations.IsDisplayed(jc:Operations.CanCast&lt;emn:WebNode&gt;(j:variable.selectedNodeData)),
+                Data = jc:Operations.TryCast&lt;emn:WebNode&gt;(j:variable.selectedNodeData)
+            }">
+            </div>
+            <div style='overflow:auto;height:100%;width:100%' j:control="j:control.ListNodePane { 
+                Element.Style.Display = jc:Operations.IsDisplayed(jc:Operations.CanCast&lt;emn:ListNode&gt;(j:variable.selectedNodeData)),
+                Data = jc:Operations.TryCast&lt;emn:ListNode&gt;(j:variable.selectedNodeData)
+            }">
+            </div>
+            <div style='overflow:auto;height:100%;width:100%' j:control="j:control.FolderNodePane { 
+                Element.Style.Display = jc:Operations.IsDisplayed(jc:Operations.CanCast&lt;emn:FolderNode&gt;(j:variable.selectedNodeData)),
+                Data = jc:Operations.TryCast&lt;emn:FolderNode&gt;(j:variable.selectedNodeData)
+            }">
+            </div>
+            <div style='overflow:auto;height:100%;width:100%' j:control="j:control.InfoTabStrip">
+                <j:collection target="TabItems">
+                    <j:item source="tabs:TabItem() {
+                Header = tabs:ImageTextTabHeaderItem() {
+                    Text = 'Information',
+                    Image = '/_layouts/images/info16by16.gif'
                 },
-                Page = informations:InformationPane() }"/>
-              <j:item source="tabs:TabItem() { 
-                Header = tabs:ImageTextTabHeaderItem() { 
-                  Text = 'Settings',
-                  Image = '/_layouts/images/zap16.gif'
+                Page = informations:InformationPane() }" />
+                    <j:item source="tabs:TabItem() {
+                Header = tabs:ImageTextTabHeaderItem() {
+                    Text = 'Settings',
+                    Image = '/_layouts/images/zap16.gif'
                 },
                 Page = ui:SettingsPane() {
-                   Data = j:control.Data,
-                  Element.Style.Overflow = html:StyleOverflow.Auto
-                }}"/>
-            </j:collection>
-          </div>
-          <div style='overflow:auto;height:100%;width:100%' j:control="webs:WebPane() { 
-               Element.Style.Display = jc:Operations.IsDisplayed(jc:Operations.CanCast&lt;emn:WebNode&gt;(j:variable.selectedNodeData)),
-               Data = jc:Operations.TryCast&lt;emn:WebNode&gt;(j:variable.selectedNodeData)
-            }">
-          </div>
-          <div style='overflow:auto;height:100%;width:100%' j:control="j:control.ListNodePane { 
-               Element.Style.Display = jc:Operations.IsDisplayed(jc:Operations.CanCast&lt;emn:ListNode&gt;(j:variable.selectedNodeData)),
-               Data = jc:Operations.TryCast&lt;emn:ListNode&gt;(j:variable.selectedNodeData)
-            }">
-          </div>
-          <div style='overflow:auto;height:100%;width:100%' j:control="j:control.FolderNodePane { 
-               Element.Style.Display = jc:Operations.IsDisplayed(jc:Operations.CanCast&lt;emn:FolderNode&gt;(j:variable.selectedNodeData)),
-               Data = jc:Operations.TryCast&lt;emn:FolderNode&gt;(j:variable.selectedNodeData)
-            }">
-          </div>
+                    Data = j:control.Data,
+                    Element.Style.Overflow = html:StyleOverflow.Auto
+                }}" />
+                </j:collection>
+            </div>
         </div>
     </div>
  </body>

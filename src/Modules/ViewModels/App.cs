@@ -47,23 +47,11 @@ namespace SharePoint.Explorer.ViewModels
             new App();
         }
 
-        internal static async void StartExternal()
-        {
-            Web web = new Web() { Url = "http://team.bluebridge.de/personal/amedovoj" };
-            try
-            {
-                WebDetail detail = await web.Detail.Get(CancellationToken.None);
-            }
-            catch(Exception e)
-            {
-                throw e;
-            }
-
-        }
-
+        string user;
         void Load()
         {
             screen = new Screen(webPart.Outer);
+            user = HtmlWindow.Current.Get<JObject>("_spPageContextInfo")?.Get<string>("userLoginName")?.Replace(".", "_")?.Replace("@", "_");
             LoadConfiguration();
             this.deepLink = new DeepLinkViewModel(Navigate);
             DeepLink deepLink = DeepLink;
@@ -127,12 +115,17 @@ namespace SharePoint.Explorer.ViewModels
         {
             Configuration<RootNode> configuration = ReadConfiguration(LazyWindow.ShowError);
             screen.Apply(configuration.Screen);
-            RootNodes = new RootNodes() { Configuration = configuration };
+            RootNodes = new RootNodes(this) { Configuration = configuration };
         }
 
         internal void AddRoot()
         {
             addRoot.Show();
+        }
+
+        internal void ApplyRootUrl(RootNode rootNode)
+        {
+            rootNode.ApplyRootUrl(user);
         }
 
         Configuration<RootNode> ReadConfiguration(Action<Exception> failed)
@@ -141,6 +134,23 @@ namespace SharePoint.Explorer.ViewModels
             try
             {
                 configuration = JsonDeserializer.Deserialize<Configuration<RootNode>>(webPart.Settings);
+                if(configuration?.Roots != null)
+                {
+                    foreach (RootNode rootNode in configuration.Roots)
+                    {
+                        RootNode node = rootNode;
+                        ApplyRootUrl(node);
+                        if(rootNode.Url.Contains('{'))
+                        {
+                            node.WebNode.Detail.Get(
+                                delegate (WebDetail detail)
+                                {
+                                    node.Title = detail.Web.Title;
+
+                                }, Dummies.Action<Exception>);
+                        }
+                    }
+                }
             }
             catch (Exception e)
             {

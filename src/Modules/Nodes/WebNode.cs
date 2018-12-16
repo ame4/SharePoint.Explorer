@@ -22,9 +22,12 @@ namespace SharePoint.Explorer.Modules.Nodes
         readonly WebsNode webs;
         readonly ListsNode lists;
         DeepLink deepLink;
-        readonly ObservableHierarchyList<IExplorerNode> children;  
-        public WebNode()
+        readonly ObservableHierarchyList<IExplorerNode> children;
+
+        internal readonly RootNode RootNode;
+        public WebNode(RootNode rootNode)
         {
+            RootNode = rootNode;
             webs = new WebsNode(this);
             lists = new ListsNode(this);
             children = new ObservableHierarchyList<IExplorerNode>( new IExplorerNode[] { webs, lists });
@@ -32,7 +35,7 @@ namespace SharePoint.Explorer.Modules.Nodes
 
         protected override Web CreateWebInstance()
         {
-            return new WebNode();
+            return new WebNode(null);
         }
 
         protected override List CreateListInstance()
@@ -40,7 +43,6 @@ namespace SharePoint.Explorer.Modules.Nodes
             return new ListNode();
         }
 
-        [IgnoreDataMember]
         public IObservableList Children
         {
             get
@@ -54,19 +56,17 @@ namespace SharePoint.Explorer.Modules.Nodes
             return NodeUtil.RefeshContextMenu(Refresh);
         }
 
-        protected void Refresh()
+        internal void Refresh()
         {
             webs.Refresh();
             lists.Refresh();
         }
 
-        [IgnoreDataMember]
         public string Image
         {
             get { return "/_layouts/images/web.gif"; }
         }
 
-        [IgnoreDataMember]
         public string Description
         {
             get { return Url; }
@@ -90,7 +90,6 @@ namespace SharePoint.Explorer.Modules.Nodes
             return NavigateDisposition.Next;
         }
 
-        [IgnoreDataMember]
         public DeepLink DeepLink
         {
             get
@@ -107,5 +106,11 @@ namespace SharePoint.Explorer.Modules.Nodes
                 return deepLink;
             }
         }
+
+        protected override IDisposable LoadSubsites()
+        {
+            return RootNode != null && RootNode.IsSite ? LoadSiteCollection() : base.LoadSubsites();
+        }
+
     }
 }
