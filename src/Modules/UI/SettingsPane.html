@@ -34,7 +34,7 @@
           <tbody>
             <tr>
               <td>
-                <input type="radio" j:control="buttons:OptionBox&lt;configurations:DisplayCurrentMode?&gt;() { Key = configurations:DisplayCurrentMode.None, Value = j:control.Data.RootNodes.Configuration.DisplayCurrent }"/>
+                <buttons:OptionBox j:control="&lt;configurations:DisplayCurrentMode?&gt;() { Key = configurations:DisplayCurrentMode.None, Value = j:control.Data.RootNodes.Configuration.DisplayCurrent }"/>
               </td>
               <th>
                 <span j:control="buttons:OptionLabel&lt;configurations:DisplayCurrentMode?&gt;() { Key = configurations:DisplayCurrentMode.None, Value = j:control.Data.RootNodes.Configuration.DisplayCurrent }">None</span>
@@ -42,7 +42,7 @@
             </tr>
             <tr>
               <td>
-                <input type="radio" j:control="buttons:OptionBox&lt;configurations:DisplayCurrentMode?&gt;() { Key = configurations:DisplayCurrentMode.Web, Value = j:control.Data.RootNodes.Configuration.DisplayCurrent }"/>
+                <buttons:OptionBox j:control="&lt;configurations:DisplayCurrentMode?&gt;() { Key = configurations:DisplayCurrentMode.Web, Value = j:control.Data.RootNodes.Configuration.DisplayCurrent }"/>
               </td>
               <th>
                 <span j:control="buttons:OptionLabel&lt;configurations:DisplayCurrentMode?&gt;() { Key = configurations:DisplayCurrentMode.Web, Value = j:control.Data.RootNodes.Configuration.DisplayCurrent }">Web</span>
@@ -50,7 +50,7 @@
             </tr>
             <tr>
               <td>
-                <input type="radio" j:control="buttons:OptionBox&lt;configurations:DisplayCurrentMode?&gt;() { Key = configurations:DisplayCurrentMode.Site, Value = j:control.Data.RootNodes.Configuration.DisplayCurrent }"/>
+                <buttons:OptionBox j:control="&lt;configurations:DisplayCurrentMode?&gt;() { Key = configurations:DisplayCurrentMode.Site, Value = j:control.Data.RootNodes.Configuration.DisplayCurrent }"/>
               </td>
               <th>
                 <span j:control="buttons:OptionLabel&lt;configurations:DisplayCurrentMode?&gt;() { Key = configurations:DisplayCurrentMode.Site, Value = j:control.Data.RootNodes.Configuration.DisplayCurrent }">Site</span>
@@ -62,21 +62,16 @@
     </tr>
     <tr>
       <td style="text-align:right; padding-left:4px; white-space:nowrap">
-        <span tabindex="1"
-          j:control="buttons:ImageTextButton() 
-              { 
+        <buttons:ImageTextButton tabindex="1" j:control="
                   Execute = j:control.Data.SaveConfiguration,
                   Image = '/_layouts/images/save.gif',
                   Text = 'Save Settings'
-              }">
-        </span>
-        <span style="margin-left:10px" tabindex="1" j:control="buttons:ImageTextButton() 
-            { 
+              "/>
+        <buttons:ImageTextButton style="margin-left:10px" tabindex="1" j:control="
                 Execute = j:control.Data.LoadConfiguration,
                 Image = '/_layouts/images/refresh.gif',
                 Text = 'Reload Settings'
-            }">
-        </span>
+            "/>
       </td>
     </tr>
     </tbody>

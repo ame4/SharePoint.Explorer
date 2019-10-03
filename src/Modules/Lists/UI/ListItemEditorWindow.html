@@ -24,9 +24,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body j:type="ui:ListItemEditorWindow">
-  <div j:control="gridLayout:GridLayoutPane() {
-        Rows = [ { Value = 40, Absolute = true }, { Value = 1 } ]       
-       }" style="width:100%;height:100%">
+  <gridLayout:GridLayoutPane j:control="Rows = [ { Value = 40, Absolute = true }, { Value = 1 } ]" style="width:100%;height:100%">
       <div j:control="controls:Control() {
            gridLayout:GridLayoutPane.RowBindings = [ gridLayout:UnitBinding(1, 1, false) { Style = j:target.target.Element.Style } ]
            }" style="width:100%;overflow:auto">
@@ -58,24 +56,20 @@
           <tbody>
               <tr>
                   <td style="text-align:right; vertical-align:middle">
-                      <span tabindex="1" j:control="buttons:ImageTextButton() 
-                          { 
+                      <buttons:ImageTextButton tabindex="1" j:control="
                               Execute = j:control.OK,
                               Image = '/_layouts/images/save.gif',
                               Text = windows:MessageBoxSkin.Instance.ButtonSkin(windows:DialogResult.OK).Text
-                          }">
-                      </span>
-                      <span tabindex="1" j:control="buttons:ImageTextButton() 
-                            { 
+                          "/>
+                      <buttons:ImageTextButton tabindex="1" j:control="
                                 Execute = j:control.Cancel,
                                 ImageClass = windows:MessageBoxSkin.Instance.ButtonSkin(windows:DialogResult.Cancel).ImageClass,
                                 Text = windows:MessageBoxSkin.Instance.ButtonSkin(windows:DialogResult.Cancel).Text
-                            }">
-                      </span>
+                            "/>
                   </td>
               </tr>
           </tbody>
       </table>
-  </div>
+  </gridLayout:GridLayoutPane>
 </body>
 </html>

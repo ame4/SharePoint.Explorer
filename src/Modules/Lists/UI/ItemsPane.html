@@ -32,10 +32,7 @@
     <j:variable name="contentTypes" type="dp:ObservableList&lt;sp:ListContentType&gt;" />
     <j:variable name="items" type="dplazy:ILazyObservable&lt;sp:FolderListItemCollection&gt;" />
   
-    <div style="height: 100%; width: 100%; overflow: hidden; position: relative" 
-        j:control="gridLayout:GridLayoutPane() {
-          Rows = [ { Value = 40, Absolute = true }, { Value = 1 } ]
-        }">
+    <gridLayout:GridLayoutPane style="height:100%;width:100%;position: relative" j:control="Rows = [ { Value = 40, Absolute = true }, { Value = 1 } ]">
         <table cellpadding="4" cellspacing="0">
             <tbody>
                 <tr>
@@ -60,31 +57,29 @@
               }"
             style="position: absolute; width: 100%; overflow: hidden">
 
-          <div style="width: 100%; height: 100%; overflow: hidden" j:control="splitters:Splitter&lt;panes:SplitPane&gt;(false, 0.5)">
-                <div tabindex="1" style="overflow: hidden" j:control="j:control.Overview { 
+          <splitters:Splitter style="width: 100%; height: 100%; overflow: hidden" j:control="&lt;panes:SplitPane&gt;(false, 0.5)">
+                <j:control.Overview tabindex="1" style="overflow: hidden" j:control="
                      DataSource = j:control.Data.OverviewListView.Target,
                      RowsSelection.Data =: j:control.Data.SelectedItem
-                }"></div>
-                <div style="overflow: hidden; position: relative" 
-                     j:control="gridLayout:GridLayoutPane() {
+                    "/>
+                <gridLayout:GridLayoutPane style="overflow: hidden; position: relative" 
+                     j:control="
                         Rows = [ { Value = 40, Absolute = true }, { Value = 1 } ],
                         Element.Style.Visibility := jc:Operations.IsVisible(jc:Operations.IsNotNull(j:control.Data.SelectedItem))
-                    }">
+                     ">
                   <table cellspacing="0" cellpadding="0" style="width: 100%" j:control="controls:Control() { ClassName = styles:MessageBoxStyles.CommandBar }">
                         <tbody>
                             <tr>
                                 <td style="padding:4px; border-bottom:solid 1px white">
-                                    <span tabindex="1" j:control="buttons:ImageTextButton() 
-                                      { 
+                                    <buttons:ImageTextButton tabindex="1" j:control=" 
                                           Execute = j:control.Data.EditItem,
                                           Image = '/_layouts/images/edit.gif',
                                           Enabled = jc:Operations.Cast&lt;sys:UInt64&gt;(sp:BasePermissions.EditListItems).Equals(
                                             jc:Operations.And(jc:Operations.Cast&lt;sp:BasePermissions, sys:UInt64&gt;(sp:BasePermissions.EditListItems), 
                                             jc:Operations.Cast&lt;sp:BasePermissions, sys:UInt64&gt;(j:control.Data.SelectedItem.EffectiveBasePermissions))),
                                           Text = 'Edit...'
-                                      }"></span>
-                                    <span tabindex="1" j:control="buttons:ImageTextButton() 
-                                      { 
+                                        "/>
+                                    <buttons:ImageTextButton tabindex="1" j:control="
                                           Execute = j:control.Data.CopyItem,
                                           Image = '/_layouts/images/copy.gif',
                                           Text = 'Copy...',
@@ -95,34 +90,30 @@
                                               )
                                             )
                                           )
-                                      }"></span>
-                                    <span tabindex="1" j:control="buttons:ImageTextButton() 
-                                      { 
+                                        "/>
+                                    <buttons:ImageTextButton tabindex="1" j:control="
                                           Execute = j:control.Data.DeleteItem,
                                           Image = '/_layouts/images/delitem.gif',
                                           Text = 'Delete...',
                                           Enabled = jc:Operations.Cast&lt;sys:UInt64&gt;(sp:BasePermissions.DeleteListItems).Equals(
                                             jc:Operations.And(jc:Operations.Cast&lt;sp:BasePermissions, sys:UInt64&gt;(sp:BasePermissions.DeleteListItems), 
                                             jc:Operations.Cast&lt;sp:BasePermissions, sys:UInt64&gt;(j:control.Data.SelectedItem.EffectiveBasePermissions)))
-                                      }">
-                                    </span>
-                                    <span style="margin-left:10px" tabindex="1" j:control="buttons:ImageTextButton() 
-                                      { 
-                                          Execute = j:control.Data.AddItem,
-                                          Image = '/_layouts/images/newitem.gif',
-                                          Text = 'Add item...',
-                                          Enabled = jc:Operations.Or(jc:Operations.IsNull(j:control.Data.FolderItems.ParentFolder.Item),
-                                            jc:Operations.Cast&lt;sys:UInt64&gt;(sp:BasePermissions.AddListItems).Equals(
-                                                        jc:Operations.And(jc:Operations.Cast&lt;sp:BasePermissions, 
-                                                            sys:UInt64&gt;(sp:BasePermissions.AddListItems), 
-                                                        jc:Operations.Cast&lt;sp:BasePermissions, 
-                                                            sys:UInt64&gt;(j:control.Data.FolderItems.ParentFolder.Item.EffectiveBasePermissions)
-                                                        )
+                                      "/>
+                                    <buttons:ImageTextButton style="margin-left:10px" tabindex="1" j:control="
+                                              Execute = j:control.Data.AddItem,
+                                              Image = '/_layouts/images/newitem.gif',
+                                              Text = 'Add item...',
+                                              Enabled = jc:Operations.Or(jc:Operations.IsNull(j:control.Data.FolderItems.ParentFolder.Item),
+                                                jc:Operations.Cast&lt;sys:UInt64&gt;(sp:BasePermissions.AddListItems).Equals(
+                                                            jc:Operations.And(jc:Operations.Cast&lt;sp:BasePermissions, 
+                                                                sys:UInt64&gt;(sp:BasePermissions.AddListItems), 
+                                                            jc:Operations.Cast&lt;sp:BasePermissions, 
+                                                                sys:UInt64&gt;(j:control.Data.FolderItems.ParentFolder.Item.EffectiveBasePermissions)
+                                                            )
+                                                )
                                             )
-                                        )
-                                      }"></span>
-                                    <span style="margin-left:10px" tabindex="1" j:control="buttons:ImageTextButton() 
-                                      { 
+                                          "/>
+                                    <buttons:ImageTextButton style="margin-left:10px" tabindex="1" j:control="
                                           Execute = j:control.Data.AddFolder,
                                           Image = '/_layouts/images/nfolder.gif',
                                           Text = 'Add folder...',
@@ -135,15 +126,12 @@
                                                         )
                                             )
                                         )
-                                      }"></span>
+                                      "/>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-                    <div style="width:100%" 
-                      j:control="tabs:TabStrip() {
-                        gridLayout:GridLayoutPane.RowBindings = [ gridLayout:UnitBinding(1, 1, false) { Style = j:target.target.Element.Style } ]
-                      }">
+                    <tabs:TabStrip style="width:100%" j:control="gridLayout:GridLayoutPane.RowBindings = [ gridLayout:UnitBinding(1, 1, false) { Style = j:target.target.Element.Style } ]">
                       <j:collection target="TabItems">
                         <j:item source="tabs:TabItem() { 
                             Header = tabs:ImageTextTabHeaderItem() { Text = 'Fields' },
@@ -154,11 +142,11 @@
                             Page = j:control.PermissionsGrid { DataSource = j:control.Data.PermissionsListView.Target }
                           }"/>
                       </j:collection>
-                    </div>
-                  </div>
-            </div>
+                    </tabs:TabStrip>
+                  </gridLayout:GridLayoutPane>
+            </splitters:Splitter>
         </div>
-    </div>
+    </gridLayout:GridLayoutPane>
     <j:bind source="j:control.Data.FolderItems.ParentFolder.ParentList.ContentTypes.Value" target="j:variable.contentTypes" active="j:control.Data.IsActive" />
     <j:bind source="j:control.Data.FolderItems.ParentFolder.ParentList.SelectedContentType" target="j:control.Data.FolderItems.ContentType" 
             active="jc:Operations.IsNull(j:control.Data.FolderItems.ContentType)" />

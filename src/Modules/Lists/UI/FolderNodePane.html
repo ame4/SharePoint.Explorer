@@ -17,7 +17,7 @@
 </head>
 <body j:type="ui:FolderNodePane">
     <j:variable name="selectedTabItem" type="tabs:TabItem"/>
-    <div style="height:100%; width:100%" j:control="j:control.TabStrip { Selection.Data = j:variable.selectedTabItem }">
+    <j:control.TabStrip style="height:100%; width:100%" j:control="Selection.Data = j:variable.selectedTabItem">
       <j:collection target="TabItems">
         <j:item source="tabs:TabItem() { Header = tabs:ImageTextTabHeaderItem() { Text = 'General' },
           Page = ui:FolderGeneralPane() { 
@@ -34,6 +34,6 @@
           }
         }"/>
       </j:collection>
-    </div>
+    </j:control.TabStrip>
 </body>
 </html>

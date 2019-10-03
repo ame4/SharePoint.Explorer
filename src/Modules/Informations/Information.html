@@ -14,14 +14,12 @@
     <title></title>
 </head>
   <body j:type="emi:InformationPane">
-    <div style='overflow:auto;height:100%;width:100%' j:control="gridLayout:GridLayoutPane() {
-        Rows = [ { Value = 1 },  { Value = 40, Absolute = true } ]
-      }">
+    <gridLayout:GridLayoutPane style='overflow:auto;height:100%;width:100%' j:control="Rows = [ { Value = 1 },  { Value = 40, Absolute = true } ]">
       <div class='title'>SharePoint Explorer</div>
       <div class='copyright' style='position:absolute' 
         j:control="controls:Control() {
           gridLayout:GridLayoutPane.RowBindings = [ gridLayout:UnitBinding(1) { Style = j:target.target.Element.Style } ]
         }">provided by SharePoint Explorer</div>
-  </div>
+  </gridLayout:GridLayoutPane>
 </body>
 </html>

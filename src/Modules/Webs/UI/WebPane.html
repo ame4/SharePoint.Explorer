@@ -19,7 +19,7 @@
 </head>
 <body j:type="ui:WebPane">
   <j:variable name="selectedTabItem" type="tabs:TabItem"/>
-  <div style="height:100%; width:100%" j:control="tabs:TabStrip() { Selection.Data = j:variable.selectedTabItem }">
+  <tabs:TabStrip style="height:100%; width:100%" j:control="Selection.Data = j:variable.selectedTabItem">
     <j:collection target="TabItems">
       <j:item source="tabs:TabItem() { 
         Header = tabs:ImageTextTabHeaderItem() { 
@@ -29,6 +29,6 @@
           Data = j:control.Data,
           Element.Style.Overflow = html:StyleOverflow.Auto }}"/>
     </j:collection>
-  </div>
+  </tabs:TabStrip>
 </body>
 </html>

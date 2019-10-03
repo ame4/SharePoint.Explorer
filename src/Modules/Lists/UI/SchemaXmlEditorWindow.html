@@ -24,29 +24,23 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 <body j:type="emlui:SchemaXmlEditorWindow">
-    <div j:control="gridLayout:GridLayoutPane() {
-        Rows = [ { Value = 1 },  { Value = 40, Absolute = true } ]       
-       }" style="width:100%;height:100%">
-      <textarea 
-        j:control = "controls:TextBox() { Value = j:control.Data.SchemaXml,
-          gridLayout:GridLayoutPane.RowBindings = [ gridLayout:UnitBinding(0, 1, false) { Style = j:target.target.Element.Style } ]
-        }" style="width:100%; border-style:none"></textarea>
+    <gridLayout:GridLayoutPane j:control="Rows = [ { Value = 1 },  { Value = 40, Absolute = true } ]" style="width:100%;height:100%">
+      <controls:MultilineTextBox j:control = "Value = j:control.Data.SchemaXml,
+          gridLayout:GridLayoutPane.RowBindings = [ gridLayout:UnitBinding(0, 1, false) { Style = j:target.target.Element.Style } ]" style="width:100%; border-style:none"/>
       <table cellpadding="0" cellspacing="0" style="width:100%"
               j:control="controls:Control() { ClassName = styles:MessageBoxStyles.CommandBar }">
           <tbody>
               <tr>
                   <td style="text-align:right; vertical-align:middle">
-                      <span tabindex="1" j:control="buttons:ImageTextButton() 
-                          { 
+                      <buttons:ImageTextButton tabindex="1" j:control="
                               Execute = j:control.Cancel,
                               ImageClass = windows:MessageBoxSkin.Instance.ButtonSkin(windows:DialogResult.Cancel).ImageClass,
                               Text = windows:MessageBoxSkin.Instance.ButtonSkin(windows:DialogResult.Cancel).Text
-                          }">
-                      </span>
+                          "/>
                   </td>
               </tr>
           </tbody>
       </table>
-    </div>
+    </gridLayout:GridLayoutPane>
 </body>
 </html>

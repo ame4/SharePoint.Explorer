@@ -14,19 +14,18 @@ xmlns:controls="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI
   <title></title>
 </head>
 <body j:type="ui:ContentTypesPane">
-    <div style="height: 100%; width: 100%; overflow: hidden"
-        j:control="splitters:Splitter(false, 0.5)">
-        <div style="overflow: hidden" j:control="j:control.Overview
-            {
+    <splitters:Splitter style="height:100%;width:100%"
+        j:control="(false, 0.5)">
+        <j:control.Overview style="overflow: hidden" j:control="
               RowsSelection.Data = j:control.Data.SelectedItem,
               DataSource = j:control.Data.OverviewListView.Target
-            }">
-        </div>
+            ">
+        </j:control.Overview>
         <div style='overflow: hidden' j:control="lazy:LazyPane() {
             Element.Style.Visibility = jc:Operations.IsVisible(jc:Operations.IsNotNull(j:control.Data.SelectedItem)),
             Lazy = j:control.Data.SelectedItem.Detail
           }">
-            <div style='height: 100%; width: 100%; overflow: hidden' j:control="splitters:Splitter(true, 0.6)">
+            <splitters:Splitter style='height:100%;width:100%' j:control="(true, 0.6)">
                 <div style='overflow: auto'>
                     <table celllpading='4' cellspacing='0' class='properties'>
                         <tbody>
@@ -49,13 +48,12 @@ xmlns:controls="http://jscriptsuite.com/templates/clr/JScriptSuite.JScriptLib.UI
                         </tbody>
                     </table>
                 </div>
-                <div style='overflow: hidden' j:control="ui:FieldsGrid(j:control.Data.FieldsEditor) {
+                <ui:FieldsGrid style='overflow: hidden' j:control="(j:control.Data.FieldsEditor) {
                      DataSource = j:control.Data.FieldsEditor.FieldsListView.Target
-                }">
-                </div>
-            </div>
+                }"/>
+            </splitters:Splitter>
         </div>
-    </div>
+    </splitters:Splitter>
     <j:bind source="j:control.Data.SelectedList.ContentTypes.Value" target="Data.OverviewListView.Source" active="j:control.Data.IsActive" />
     <j:bind source="j:control.Data.SelectedItem.Detail.Value.Fields" target="Data.FieldsEditor.FieldsListView.Source" active="j:control.Data.IsActive" />
 </body>

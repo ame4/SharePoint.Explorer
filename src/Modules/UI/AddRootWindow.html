@@ -27,28 +27,24 @@
     <tbody>
       <tr>
         <th>Url</th>
-        <td><input type="text" style="width:240px" j:control="controls:TextBox() { Value = j:control.Data.Url }"/></td>
+        <td><controls:TextBox style="width:240px" j:control="Value = j:control.Data.Url"/></td>
       </tr>
       <tr>
         <th j:control="buttons:ToggleLabel() { Checked = j:control.Data.IsSite }">Site</th>
-        <td><input type="checkbox" j:control="buttons:CheckBox() { Checked = j:control.Data.IsSite }" /></td>
+        <td><buttons:CheckBox j:control="Checked = j:control.Data.IsSite" /></td>
       </tr>
       <tr>
         <td colspan="2" style="text-align:right"  j:control="controls:Control() { ClassName = styles:MessageBoxStyles.CommandBar }">
-            <span tabindex="1" j:control="buttons:ImageTextButton() 
-                { 
+            <buttons:ImageTextButton tabindex="1" j:control="
                     Execute = j:control.OK,
                     ImageClass = windows:MessageBoxSkin.Instance.ButtonSkin(windows:DialogResult.OK).ImageClass,
                     Text = windows:MessageBoxSkin.Instance.ButtonSkin(windows:DialogResult.OK).Text
-                }">
-            </span>
-            <span tabindex="1" j:control="buttons:ImageTextButton() 
-                {
+                "/>
+            <buttons:ImageTextButton tabindex="1" j:control="
                     Execute = j:control.Cancel,                          
                     ImageClass = windows:MessageBoxSkin.Instance.ButtonSkin(windows:DialogResult.Cancel).ImageClass,
                     Text = windows:MessageBoxSkin.Instance.ButtonSkin(windows:DialogResult.Cancel).Text
-                }">
-            </span>                
+                "/>
         </td>
       </tr>
     </tbody>
